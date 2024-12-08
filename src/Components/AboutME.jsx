@@ -1,10 +1,22 @@
 import { LiaFileDownloadSolid } from "react-icons/lia";
 import { FaLinkedinIn, FaInstagram  } from "react-icons/fa6";
 import { FaGithub } from "react-icons/fa6";
-import AvatarEditor from 'react-avatar-editor'
+import { gsap } from "gsap";
 import Typewriter from "react-ts-typewriter";
+import { useGSAP } from "@gsap/react";
+import { useRef } from "react";
 
 const AboutME = () => {
+  const anime = useRef()
+  useGSAP(()=>{
+    gsap.to(anime.current,{
+      filter: "drop-shadow(0 0 40px rgba(0, 191, 255, 0.8))",
+      opacity:1,
+      x:200,
+      duration: 2,
+      delay: 1
+    })
+  })
   return (
     <div className=" p-10 grid grid-cols-2 border-b">
       <div className=" p-10">
@@ -32,7 +44,7 @@ const AboutME = () => {
         </div>
       </div>
       <div className="px-10 ">
-        <img height={500} width={300} src="/src/assets/images/20220420072822_IMG_9177-removebg-preview.png" alt="" />
+        <img className="opacity-0" ref={anime} height={500} width={300} src="/src/assets/images/20220420072822_IMG_9177-removebg-preview.png" alt="" />
       </div>
     </div>
   );
