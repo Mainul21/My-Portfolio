@@ -1,12 +1,13 @@
 import { LiaFileDownloadSolid } from "react-icons/lia";
 import { FaLinkedinIn, FaInstagram  } from "react-icons/fa6";
 import { FaGithub } from "react-icons/fa6";
+import { FaArrowDown } from "react-icons/fa";
 import { gsap } from "gsap";
 import Typewriter from "react-ts-typewriter";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 
-const AboutME = () => {
+const AboutME = ({scroll}) => {
   const anime = useRef()
   useGSAP(()=>{
     gsap.to(anime.current,{
@@ -36,11 +37,13 @@ const AboutME = () => {
               Download CV <LiaFileDownloadSolid className="font-bold" />
             </button>
           </a>
+          <button onClick={scroll}  className="btn text-black font-bold mt-4 bg-blue-500 hover:bg-amber-500 ml-2">More About Me<FaArrowDown />
+          </button>
         </div>
         <div className="mt-4">
-          <button className="btn bg-zinc-400 text-black hover:text-white mr-2 p-4"><FaLinkedinIn></FaLinkedinIn></button>
-          <button className="btn bg-zinc-400 text-black hover:text-white mr-2 p-4"><FaGithub/></button>
-          <button className="btn bg-zinc-400 text-black hover:text-white mr-2 p-4"><FaInstagram/></button>
+          <a href="https://www.linkedin.com/in/mainulhossainchisty/"><button className="btn bg-zinc-400 text-black hover:text-white mr-2 p-4"><FaLinkedinIn></FaLinkedinIn></button></a>
+          <a href="https://github.com/Mainul21"><button className="btn bg-zinc-400 text-black hover:text-white mr-2 p-4"><FaGithub/></button></a>
+          <a href="https://www.instagram.com/mainul_irl?igsh=MWdlMHYzbXRqaHdhcA=="><button className="btn bg-zinc-400 text-black hover:text-white mr-2 p-4"><FaInstagram/></button></a>
         </div>
       </div>
       <div className="px-10 ">
