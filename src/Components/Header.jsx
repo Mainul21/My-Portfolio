@@ -1,15 +1,23 @@
 
 import { SiAnkermake } from "react-icons/si";
 
-const Header = () => {
-
-  const items = <>
-    <li className="btn bg-zinc-400 rounded-xl text-black hover:text-white mr-3"><a href="#">Education</a></li>
-    <li className="btn bg-zinc-400 rounded-xl text-black hover:text-white mr-3"><a href="#">Projects</a></li>
-    <li className="btn bg-zinc-400 rounded-xl text-black hover:text-white mr-3"><a href="#">Skills</a></li>
-  
-  </>
-
+const Header = ({ scrollToSection }) => {
+  const items = (
+    <>
+      <li className="btn bg-zinc-400 rounded-xl text-black hover:text-white mr-3">
+        <a href="#">Education</a>
+      </li>
+      <li className="btn bg-zinc-400 rounded-xl text-black hover:text-white mr-3">
+        <a href="#">Projects</a>
+      </li>
+      <li
+        onClick={()=>scrollToSection("skills")}
+        className="btn bg-zinc-400 rounded-xl text-black hover:text-white mr-3"
+      >
+        <a href="#">Skills</a>
+      </li>
+    </>
+  );
   return (
     <div>
       <div className="navbar bg-base-100 p-4 mx-auto">
@@ -38,13 +46,12 @@ const Header = () => {
               {items}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl"><SiAnkermake /></a>
+          <a className="btn btn-ghost text-xl">
+            <SiAnkermake />
+          </a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            
-                  {items}
-          </ul>
+          <ul className="menu menu-horizontal px-1">{items}</ul>
         </div>
         <div className="navbar-end">
           <a className="btn">Contact Me</a>
