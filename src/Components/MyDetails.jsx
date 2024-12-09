@@ -2,6 +2,9 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import {  useRef } from "react";
 import { IoManSharp } from "react-icons/io5";
+import { ScrollTrigger } from "gsap/ScrollTrigger";  
+
+gsap.registerPlugin(ScrollTrigger) 
 
 const MyDetails = () => {
 
@@ -12,12 +15,26 @@ const MyDetails = () => {
         y:-50,
         opacity:0,
         duration: 2,
-        delay: 2
+        delay: 2,
+        scrollTrigger:{
+          trigger:textref.current,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none none"
+
+        }
       })
       gsap.to(imgRef.current,{
         rotateY: 360,
         duration: 2,
-        delay: 2
+        delay: 2,
+        scrollTrigger:{
+          trigger:imgRef.current,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none none"
+
+        }
       })
     })
 
@@ -34,7 +51,7 @@ const MyDetails = () => {
             ref={imgRef}
             height={250}
             width={300}
-            src="/src/assets/images/Mainul.jpg"
+            src="https://i.ibb.co.com/nwJPMqh/Mainul.jpg"
             alt=""
           />
         </div>

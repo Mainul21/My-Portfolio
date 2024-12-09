@@ -47,7 +47,7 @@ const AboutME = ({scroll}) => {
         </div>
       </div>
       <div className="px-10 ">
-        <img className="opacity-0" ref={anime} height={500} width={300} src="/src/assets/images/20220420072822_IMG_9177-removebg-preview.png" alt="" />
+        <img className="opacity-0" ref={anime} height={500} width={300} src="https://i.ibb.co.com/sqDYKQ0/20220420072822-IMG-9177-removebg-preview.png" alt="" />
       </div>
     </div>
   );

@@ -2,6 +2,10 @@ import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import {gsap} from "gsap";
 
+import { ScrollTrigger } from "gsap/ScrollTrigger";  
+
+gsap.registerPlugin(ScrollTrigger) 
+
 const Skills = () => {
 
   const logo = useRef([])
@@ -18,7 +22,14 @@ const Skills = () => {
         y: 0,
         duration: 1,
         stagger: 0.2,
-        delay: 3
+        delay: 0.5,
+        scrollTrigger:{
+          trigger:logo.current,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none none"
+
+        }
       }
     )
   })
