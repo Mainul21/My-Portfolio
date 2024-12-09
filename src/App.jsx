@@ -3,6 +3,7 @@ import AboutME from "./Components/AboutME";
 import Header from "./Components/Header";
 import MyDetails from "./Components/MyDetails";
 import Skills from "./Components/Skills";
+import Footer from "./Components/Footer";
 
 const App = () => {
   const detailsRef = useRef(null);
@@ -31,6 +32,7 @@ const App = () => {
           <Skills></Skills>
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 };
