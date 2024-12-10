@@ -35,7 +35,7 @@ const Skills = () => {
   })
 
   return (
-    <div className="p-10 ">
+    <div className="p-10 border-b">
       <h1 className="text-5xl font-bold text-center ">
         Skills & <span className="text-amber-500">Abilities</span>
       </h1>

@@ -4,6 +4,7 @@ import Header from "./Components/Header";
 import MyDetails from "./Components/MyDetails";
 import Skills from "./Components/Skills";
 import Footer from "./Components/Footer";
+import Projects from "./Components/Projects/Projects";
 
 const App = () => {
   const detailsRef = useRef(null);
@@ -31,6 +32,7 @@ const App = () => {
         <div ref={sectionRef.skills}>
           <Skills></Skills>
         </div>
+        <div><Projects></Projects></div>
       </div>
       <Footer></Footer>
     </div>
