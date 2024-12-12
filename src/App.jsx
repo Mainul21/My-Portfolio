@@ -5,8 +5,13 @@ import MyDetails from "./Components/MyDetails";
 import Skills from "./Components/Skills";
 import Footer from "./Components/Footer";
 import Projects from "./Components/Projects/Projects";
+import Education from "./Components/Education/Education";
+
 
 const App = () => {
+
+  
+
   const detailsRef = useRef(null);
   const sectionRef = {
     skills: useRef(null),
@@ -33,6 +38,9 @@ const App = () => {
           <Skills></Skills>
         </div>
         <div><Projects></Projects></div>
+        <div>
+          <Education></Education>
+        </div>
       </div>
       <Footer></Footer>
     </div>
