@@ -6,6 +6,7 @@ import Skills from "./Components/Skills";
 import Footer from "./Components/Footer";
 import Projects from "./Components/Projects/Projects";
 import Education from "./Components/Education/Education";
+import ContactMe from "./Components/ContactMe";
 
 
 const App = () => {
@@ -40,6 +41,9 @@ const App = () => {
         <div><Projects></Projects></div>
         <div>
           <Education></Education>
+        </div>
+        <div>
+          <ContactMe></ContactMe>
         </div>
       </div>
       <Footer></Footer>
