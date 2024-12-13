@@ -12,8 +12,8 @@ const ContactMe = () => {
     console.log("submitted");
 
     emailjs
-      .sendForm("service_y1qz4b5", "template_3tqb5ul", formRef.current, {
-        publicKey: "A_7olKZ7ELvFjSpOk",
+      .sendForm(import.meta.env.VITE_service_id, import.meta.env.VITE_template_id, formRef.current, {
+        publicKey: import.meta.env.VITE_public_key,
       })
       .then(
         () => {
