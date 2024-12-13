@@ -4,10 +4,12 @@ import { SiAnkermake } from "react-icons/si";
 const Header = ({ scrollToSection }) => {
   const items = (
     <>
-      <li className="btn bg-zinc-400 rounded-xl text-black hover:text-white mr-3">
+      <li onClick={()=>scrollToSection("education")} 
+      className="btn bg-zinc-400 rounded-xl text-black hover:text-white mr-3">
         <a href="#">Education</a>
       </li>
-      <li className="btn bg-zinc-400 rounded-xl text-black hover:text-white mr-3">
+      <li  onClick={()=>scrollToSection("projects")}
+      className="btn bg-zinc-400 rounded-xl text-black hover:text-white mr-3">
         <a href="#">Projects</a>
       </li>
       <li
@@ -54,7 +56,7 @@ const Header = ({ scrollToSection }) => {
           <ul className="menu menu-horizontal px-1">{items}</ul>
         </div>
         <div className="navbar-end">
-          <a className="btn">Contact Me</a>
+          <a onClick={()=>scrollToSection("contact")} className="btn">Contact Me</a>
         </div>
       </div>
     </div>
