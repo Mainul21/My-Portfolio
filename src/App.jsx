@@ -31,13 +31,13 @@ const App = () => {
       </div>
       <div className="w-11/12 mx-auto space-y-5">
         {/* <AboutME scroll={scroll}></AboutME> */}
-        <div ref={detailsRef}>
+        {/* <div ref={detailsRef}>
           <MyDetails></MyDetails>
-        </div>
-        {/* <div ref={sectionRef.skills}>
+        </div> */}
+        <div ref={sectionRef.skills}>
           <Skills></Skills>
         </div>
-        <div ref={sectionRef.projects}>
+        {/* <div ref={sectionRef.projects}>
           <Projects></Projects>
         </div>
         <div ref={sectionRef.education}>
