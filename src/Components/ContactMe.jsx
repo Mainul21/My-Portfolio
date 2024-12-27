@@ -34,9 +34,9 @@ const ContactMe = () => {
   };
 
   return (
-    <div className="p-10">
-      <div className="p-10">
-        <h1 className="font-bold text-5xl flex items-center justify-center gap-2">
+    <div className="md:p-10">
+      <div className="md:p-10 py-4">
+        <h1 className="font-bold md:text-5xl text-3xl flex items-center justify-center gap-2">
           <FaHeadset className="text-blue-500" /> Get in{" "}
           <span className="text-amber-500">Touch</span>
         </h1>
@@ -46,12 +46,12 @@ const ContactMe = () => {
           ref={formRef}
           onSubmit={sendEmail}
           action=""
-          className=" border rounded-xl shadow-xl shadow-emerald-500 p-4 grid grid-cols-2"
+          className=" border rounded-xl shadow-xl shadow-emerald-500 p-4 md:grid md:grid-cols-2 flex flex-col gap-4"
         >
-          <div className="font-bold text-5xl flex items-center ml-3">
+          <div className="font-bold md:text-5xl text-3xl flex items-center justify-center ml-3">
             <Typewriter
               text="Thank you for getting in touch"
-              loop
+              
               delay={1000}
             ></Typewriter>
           </div>

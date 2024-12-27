@@ -35,11 +35,11 @@ const Skills = () => {
   })
 
   return (
-    <div className="p-10 border-b">
-      <h1 className="text-5xl font-bold text-center ">
+    <div className="md:p-10 border-b py-4">
+      <h1 className="md:text-5xl text-3xl font-bold text-center ">
         Skills & <span className="text-amber-500">Abilities</span>
       </h1>
-      <div className="p-10">
+      <div className="md:p-10 py-4">
         <div className="border p-10 lg:flex lg:flex-row lg:justify-evenly shadow-xl shadow-emerald-500 md:grid md:grid-cols-2">
           <div ref={(el) => (logo.current[0] = el)} className=" mr-3 mb-4 border p-4 rounded-xl flex flex-col-reverse items-center justify-center shadow-lg  shadow-emerald-500 hover:bg-blue-200 hover:text-black transition-colors duration-500">
             <span>Python</span>

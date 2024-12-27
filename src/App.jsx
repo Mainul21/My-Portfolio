@@ -30,22 +30,22 @@ const App = () => {
         <Header scrollToSection={scrollToSection}></Header>
       </div>
       <div className="w-11/12 mx-auto space-y-5">
-        {/* <AboutME scroll={scroll}></AboutME> */}
-        {/* <div ref={detailsRef}>
+        <AboutME scroll={scroll}></AboutME>
+        <div ref={detailsRef}>
           <MyDetails></MyDetails>
-        </div> */}
-        {/* <div ref={sectionRef.skills}>
+        </div>
+        <div ref={sectionRef.skills}>
           <Skills></Skills>
-        </div> */}
-        {/* <div ref={sectionRef.projects}>
+        </div>
+        <div ref={sectionRef.projects}>
           <Projects></Projects>
-        </div> */}
+        </div>
         <div ref={sectionRef.education}>
           <Education></Education>
         </div>
-        {/* <div ref={sectionRef.contact}>
+        <div ref={sectionRef.contact}>
           <ContactMe></ContactMe>
-        </div> */}
+        </div>
       </div>
       <Footer scrollToSection={scrollToSection} scroll={scroll}></Footer>
     </div>

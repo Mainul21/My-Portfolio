@@ -51,8 +51,8 @@ const Projects = () => {
   ];
   return (
     <div className="md:p-10 border-b">
-      <div className="p-3 mb-10">
-        <h1 className="text-center font-bold text-5xl">Projects & <span className="text-amber-500">Work</span></h1>
+      <div className="py-4 mb-10">
+        <h1 className="text-center font-bold md:text-5xl text-3xl">Projects & <span className="text-amber-500">Work</span></h1>
       </div>
       <div ref={anime} className='lg:grid lg:grid-cols-2 gap-4 flex flex-col border rounded py-5 px-4 shadow-xl shadow-emerald-500 mb-10'>
         {projects.map((project) => (
