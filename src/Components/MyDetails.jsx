@@ -40,12 +40,12 @@ const MyDetails = () => {
 
 
   return (
-    <div className="p-10 border-b">
-      <h1 className="text-5xl font-bold text-center items-center justify-center flex">
+    <div className="lg:p-10 p-5 lg:border-b w-full flex flex-col justify-center">
+      <h1 className="text-5xl font-bold text-center flex items-center justify-center">
         <IoManSharp /> About <span className="text-amber-500"> Me</span>
       </h1>
-      <div className="grid grid-cols-2">
-        <div className="p-10">
+      <div className="lg:grid lg:grid-cols-2">
+        <div className="lg:p-10 p-4">
           <img
             className="rounded-xl"
             ref={imgRef}
@@ -55,7 +55,7 @@ const MyDetails = () => {
             alt=""
           />
         </div>
-        <div ref={textref} className="p-10 top-">
+        <div ref={textref} className="lg:p-10 ">
           <h1 className="font-bold text-4xl mb-3">Hi! I am Mainul</h1>
           <h1 className="text-2xl mb-5">Computer Science Student | Web Developer</h1>
           <p className="text-xl mb-3 text-justify">I am a Computer Science Student Pursuing Bachelors degree from BRAC University. I am interested in <span className="text-white hover:text-blue-500">web development</span>, <span className="text-white hover:text-blue-500">machine learning</span> and <span className="text-white hover:text-blue-500">competitive Programming</span>. My main programming language is <span className="text-white hover:text-blue-500">Python</span>. I also learned basic <span className="text-white hover:text-blue-500">Kotlin</span> and <span className="text-white hover:text-blue-500">C programming</span> for university courses although I am most comfortable with Python. I use <span className="text-white hover:text-blue-500">MERN</span> stack for web devlopment. </p>

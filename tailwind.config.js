@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [require('daisyui')],
+  plugins: [require('daisyui'),
+    require('tailwindcss-debug-screens')],
   daisyui: {
     themes: false, // Disable DaisyUI's themes
   }
