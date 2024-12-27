@@ -12,7 +12,7 @@ const ProjectCard = ({ project }) => {
   return (
     <div
       
-      className="card bg-base-100 image-full w-9/12 mx-auto shadow-xl hover:shadow-emerald-500"
+      className="card bg-base-100 image-full lg:w-9/12 mx-auto shadow-xl hover:shadow-emerald-500"
     >
       <figure>
         <img src={image} alt="Shoes" />
