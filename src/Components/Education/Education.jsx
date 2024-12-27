@@ -28,9 +28,9 @@ const Education = () => {
     },
   ];
 
-  return <div className="px-10 py-10 space-y-5 border-b mb-5">
+  return <div className="md:px-10 md:py-10 space-y-5 border-b mb-5">
     <div className="p-4 mb-3">
-      <h1 className="text-5xl font-bold text-center">Educational <span className="text-amber-500">Institutes</span></h1>
+      <h1 className="md:text-5xl text-3xl font-bold text-center">Educational <span className="text-amber-500">Institutes</span></h1>
     </div>
     {institutes.map(institute=><Institute institute={institute}></Institute>)}
   </div>;

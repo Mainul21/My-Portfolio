@@ -37,13 +37,13 @@ const App = () => {
         {/* <div ref={sectionRef.skills}>
           <Skills></Skills>
         </div> */}
-        <div ref={sectionRef.projects}>
+        {/* <div ref={sectionRef.projects}>
           <Projects></Projects>
-        </div>
-        {/* <div ref={sectionRef.education}>
+        </div> */}
+        <div ref={sectionRef.education}>
           <Education></Education>
         </div>
-        <div ref={sectionRef.contact}>
+        {/* <div ref={sectionRef.contact}>
           <ContactMe></ContactMe>
         </div> */}
       </div>
