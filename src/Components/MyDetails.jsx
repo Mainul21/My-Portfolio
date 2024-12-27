@@ -40,12 +40,12 @@ const MyDetails = () => {
 
 
   return (
-    <div className="lg:p-10 p-5 lg:border-b w-full flex flex-col justify-center">
+    <div className="lg:p-10 p-5 lg:border-b w-full flex flex-col items-center justify-center">
       <h1 className="text-5xl font-bold text-center flex items-center justify-center">
         <IoManSharp /> About <span className="text-amber-500"> Me</span>
       </h1>
       <div className="lg:grid lg:grid-cols-2">
-        <div className="lg:p-10 p-4">
+        <div className="lg:p-10 p-4 flex items-center justify-center">
           <img
             className="rounded-xl"
             ref={imgRef}
