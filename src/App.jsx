@@ -7,6 +7,7 @@ import Footer from "./Components/Footer";
 import Projects from "./Components/Projects/Projects";
 import Education from "./Components/Education/Education";
 import ContactMe from "./Components/ContactMe";
+import Experience from "./Components/Experience/Experience";
 
 const App = () => {
   const detailsRef = useRef(null);
@@ -15,6 +16,7 @@ const App = () => {
     projects: useRef(null),
     education: useRef(null),
     contact: useRef(null),
+    experience: useRef(null),
   };
   const scrollToSection = (section) => {
     sectionRef[section].current.scrollIntoView({ behavior: "smooth" });
@@ -36,6 +38,9 @@ const App = () => {
         </div>
         <div ref={sectionRef.skills}>
           <Skills></Skills>
+        </div>
+        <div ref={sectionRef.experience}>
+          <Experience></Experience>
         </div>
         <div ref={sectionRef.projects}>
           <Projects></Projects>

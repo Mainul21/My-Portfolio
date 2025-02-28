@@ -18,6 +18,12 @@ const Header = ({ scrollToSection }) => {
       >
         <a href="#">Skills</a>
       </li>
+      <li
+        onClick={()=>scrollToSection("experience")}
+        className="btn bg-zinc-400 rounded-xl text-black hover:text-white mr-3"
+      >
+        <a href="#">Experience</a>
+      </li>
     </>
   );
   return (
