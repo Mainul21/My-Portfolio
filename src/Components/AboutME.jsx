@@ -67,7 +67,7 @@ const AboutME = ({ scroll }) => {
           </h1>
         </div>
         <div className="flex flex-col md:flex-row md:justify-start ">
-          <a href="/public/Mainul Hossain (1).pdf" download="Mainul's Resume">
+          <a href="/Mainul_Hossain.pdf" download="Mainul's Resume">
             <button className="btn text-black font-bold mt-4 bg-amber-500 hover:bg-blue-500 w-[150px] lg:w-full">
               Download CV <LiaFileDownloadSolid className="font-bold" />
             </button>
