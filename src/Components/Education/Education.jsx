@@ -10,10 +10,10 @@ const Education = () => {
     {
       name: "Titas Gas Adarsha High School",
       location: "Demra, Dhaka",
-      degree: "Secondary School Certificate",
+      degree: 'Secondary School Certificate',
       Year: "2018",
       Result: "4.67/5.00",
-      image: "https://i.ibb.co.com/MpXKq1g/titas.jpg",
+      image: 'https://i.ibb.co.com/MpXKq1g/titas.jpg'
     },
     {
       name: "Government Tolaram College",
@@ -26,10 +26,10 @@ const Education = () => {
     {
       name: "BRAC University",
       location: "Kha 224, Bir Uttam Rafiqul Islam Avenue, Merul Badda, Dhaka",
-      degree: "Bachelors of Computer Science",
+      degree: 'Bachelors of Computer Science',
       Year: "2021 - Present",
       Result: "3.34/4.00",
-      image: "https://i.ibb.co.com/hVd4DS6/brac.jpg",
+      image: 'https://i.ibb.co.com/hVd4DS6/brac.jpg'
     },
   ];
 
