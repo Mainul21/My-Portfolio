@@ -56,9 +56,11 @@ const MyDetails = () => {
           />
         </div>
         <div ref={textref} className="lg:p-10 ">
-          <h1 className="font-bold text-4xl mb-3">Hi! I am Mainul</h1>
+          <h1 className="font-bold text-4xl mb-3 text-white">Hi! I am Mainul</h1>
           <h1 className="text-2xl mb-5">Computer Science Student | Web Developer</h1>
-          <p className="text-xl mb-3 text-justify">I am a Computer Science Student Pursuing Bachelors degree from BRAC University. I am interested in <span className="text-white hover:text-blue-500">web development</span>, <span className="text-white hover:text-blue-500">machine learning</span> and <span className="text-white hover:text-blue-500">competitive Programming</span>. My main programming language is <span className="text-white hover:text-blue-500">Python</span>. I also learned basic <span className="text-white hover:text-blue-500">Kotlin</span> and <span className="text-white hover:text-blue-500">C programming</span> for university courses although I am most comfortable with Python. I use <span className="text-white hover:text-blue-500">MERN</span> stack for web devlopment. </p>
+          <p className="text-xl mb-3 text-justify">
+            I am a Computer Science student pursuing a Bachelor's degree at BRAC University. My primary interests lie in <span className="text-white hover:text-blue-500">web development</span>, <span className="text-white hover:text-blue-500">machine learning</span>, and <span className="text-white hover:text-blue-500">competitive programming</span>. I specialize in <span className="text-white hover:text-blue-500">Python</span> as my primary programming language, with additional proficiency in <span className="text-white hover:text-blue-500">Kotlin</span> and <span className="text-white hover:text-blue-500">C</span> from university coursework. For web development, I leverage the <span className="text-white hover:text-blue-500">MERN</span> stack to build robust and dynamic applications.
+          </p>
           <h1 className="text-xl text-amber-500 hover:text-blue-500">Location: Dhaka, Bangladesh</h1>
         </div>
       </div>
