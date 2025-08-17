@@ -2,8 +2,8 @@ import { FaPhone } from "react-icons/fa6";
 import { HiOutlineMail } from "react-icons/hi";
 const Footer = ({scrollToSection, scroll}) => {
   return (
-    <div>
-      <footer className="footer footer-center bg-base-200 text-base-content rounded p-10">
+    <div className="">
+      <footer className="footer footer-center bg-gray-900 text-base-content rounded p-10">
         <nav className="grid grid-flow-col gap-4">
           <a onClick={()=>scrollToSection('education')} className="link link-hover">Education</a>
           <a onClick={()=>scrollToSection('contact')}className="link link-hover">Contact</a>

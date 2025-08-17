@@ -1,40 +1,32 @@
-
-import { useRef } from "react";
 import { IoCodeSlashSharp } from "react-icons/io5";
 import { TbWorldWww } from "react-icons/tb";
 
 const ProjectCard = ({ project }) => {
-  
-
-  
-
   const { name, image, liveLink, description, gitLink } = project;
+
   return (
-    <div
-      
-      className="card bg-base-100 image-full lg:w-9/12 mx-auto shadow-xl hover:shadow-emerald-500"
-    >
-      <figure>
-        <img src={image} alt="Shoes" />
+    <div className="relative group bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-emerald-500/50 transition-shadow duration-300">
+      <figure className="w-full h-48 md:h-64">
+        <img
+          src={image}
+          alt={`${name} screenshot`}
+          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+        />
       </figure>
-      <div className="card-body opacity-0 hover:opacity-100 transition-opacity duration-300 ">
-        <h2 className="card-title">{name}</h2>
-        <p>{description}</p>
-        <div className="card-actions justify-between">
-          {liveLink ? (
-            <a href={liveLink}>
-              <button className="btn bg-amber-500 text-black hover:bg-transparent hover:text-white">
-                Live
-                <TbWorldWww />
+      <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+        <h2 className="text-xl md:text-2xl font-bold text-white mb-2">{name}</h2>
+        <p className="text-gray-300 text-sm md:text-base mb-4">{description}</p>
+        <div className="flex gap-4">
+          {liveLink && (
+            <a href={liveLink} target="_blank" rel="noopener noreferrer">
+              <button className="flex items-center gap-2 bg-amber-400 text-gray-900 font-semibold py-2 px-4 rounded-lg hover:bg-amber-500 transition-colors duration-300">
+                Live <TbWorldWww className="text-lg" />
               </button>
             </a>
-          ) : (
-            <></>
           )}
-          <a href={gitLink}>
-            <button className="btn bg-amber-500 text-black hover:bg-transparent hover:text-white">
-              Code
-              <IoCodeSlashSharp />
+          <a href={gitLink} target="_blank" rel="noopener noreferrer">
+            <button className="flex items-center gap-2 bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg hover:bg-gray-600 transition-colors duration-300">
+              Code <IoCodeSlashSharp className="text-lg" />
             </button>
           </a>
         </div>

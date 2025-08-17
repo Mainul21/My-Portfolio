@@ -2,64 +2,69 @@ import ProjectCard from "./ProjectCard";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { useRef } from "react";
-
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 const Projects = () => {
+  const projectsRef = useRef(null);
 
-  const anime = useRef(null);  
-  useGSAP(
-    gsap.to(anime, {
-      boxShadow: "0 0 50px rgba(16, 185, 129, 1)", // Expanded shadow
-      duration: 1.5,
-      repeat: -1, // Infinite loop
-      yoyo: true, // Reverse animation for a breathing effect
-      ease: "power1.inOut", // Smooth easing
-    })
-  );
-
+  useGSAP(() => {
+    gsap.from(projectsRef.current.children, {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.2,
+      ease: "power3.out",
+      delay: 0.5,
+    });
+  });
 
   const projects = [
     {
       name: "Book Review",
       description:
-        "A website built with MERN stack to Share book reviews with others. Basic frontend practice project. Backend work in progress",
+        "A MERN stack website for sharing book reviews. Frontend completed, backend in progress.",
       image: "https://i.ibb.co.com/rQ08znz/Screenshot-2024-12-10-191356.png",
       liveLink: "https://pricey-war.surge.sh/",
       gitLink: "https://github.com/Mainul21/Book-review",
     },
     {
-      name: "king's Estate",
+      name: "King's Estate",
       description:
-        "A website built with MERN stack for property Dealing. Basic frontend is complete. Backend work in progress",
+        "A MERN stack website for property dealings. Frontend completed, backend in progress.",
       image: "https://i.ibb.co.com/qBkNctx/Screenshot-2024-12-10-202728.png",
       liveLink: "https://kings-estate.web.app/",
-      github: "https://github.com/Mainul21/Kings-Estate",
+      gitLink: "https://github.com/Mainul21/Kings-Estate",
     },
     {
       name: "Snake Game",
-      description:
-        "Classic snake game built with python OpenGL library. Built from scratch",
+      description: "Classic Snake game built from scratch using Python and OpenGL.",
       image: "https://i.ibb.co.com/Z6T6YzB/Screenshot-2024-12-10-204403.png",
       gitLink: "https://github.com/Mainul21/Snake-Game",
     },
     {
       name: "Diamond Catcher",
-      description:
-        "Classic diamond catcher game built with python OpenGL library. Built from scratch",
+      description: "Classic Diamond Catcher game built from scratch using Python and OpenGL.",
       image: "https://i.ibb.co.com/SNjVHmz/Screenshot-2024-12-10-204831.png",
       gitLink: "https://github.com/Mainul21/Diamond-Catcher",
     },
   ];
+
   return (
-    <div className="md:p-10 border-b">
-      <div className="py-5 mb-10">
-        <h1 className="text-center font-bold md:text-5xl text-3xl">Projects & <span className="text-amber-500">Work</span></h1>
+    <section className="bg-gray-900 py-12 px-6 md:px-12 lg:px-20 border-b border-gray-800">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-3xl md:text-5xl font-extrabold text-center text-white mb-12">
+          Projects & <span className="text-amber-400">Work</span>
+        </h1>
+        <div
+          ref={projectsRef}
+          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+        >
+          {projects.map((project, index) => (
+            <ProjectCard key={index} project={project} />
+          ))}
+        </div>
       </div>
-      <div ref={anime} className='lg:grid lg:grid-cols-2 gap-4 flex flex-col border rounded py-5 px-5 shadow-xl shadow-emerald-500 mb-10'>
-        {projects.map((project) => (
-          <ProjectCard project={project}></ProjectCard>
-        ))}
-      </div>
-    </div>
+    </section>
   );
 };
 

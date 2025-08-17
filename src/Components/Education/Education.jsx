@@ -69,7 +69,7 @@ const Education = () => {
   }, [hovered]);
 
   return (
-    <div className="md:px-10 md:py-10 py-5 space-y-5 border-b mb-5">
+    <div className="md:px-10 md:py-10 py-5 space-y-5 border-b border-gray-800 mb-5">
       <div className="p-4 mb-3">
         <h1 className="md:text-5xl text-3xl font-bold text-center">
           Educational <span className="text-amber-500">Institutes</span>

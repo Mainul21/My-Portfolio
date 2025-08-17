@@ -27,7 +27,7 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className="bg-gray-900">
       <div className="">
         <Header scrollToSection={scrollToSection}></Header>
       </div>
