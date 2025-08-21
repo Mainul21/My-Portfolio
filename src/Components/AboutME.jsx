@@ -48,7 +48,7 @@ const AboutME = ({ scroll }) => {
             />
           </div>
           <div className="flex flex-col sm:flex-row gap-4">
-            <a href="/Mainul_Hossain_Chisty_resume.pdf" download="Mainul's Resume">
+            <a href="/Mainul_Hossain_Chisty_Resume.pdf" download="Mainul's Resume">
               <button className="flex items-center justify-center gap-2 bg-amber-400 text-gray-900 font-semibold py-3 px-6 rounded-lg hover:bg-amber-500 transition-colors duration-300">
                 Download CV <LiaFileDownloadSolid className="text-xl" />
               </button>
