@@ -15,21 +15,12 @@ const ContactMe = () => {
   const typewriterRef = useRef(null);
   const inputsRef = useRef(null);
   const [typewriterText, setTypewriterText] = useState("Thank you for getting in touch!");
-
+  const public_key = import.meta.env.VITE_public_key;
+  const service_id = import.meta.env.VITE_service_id;
+  const template_id = import.meta.env.VITE_template_id;
   // Initialize EmailJS
   useEffect(() => {
-    if (!import.meta.env.VITE_public_key) {
-      console.error("EmailJS Public Key is missing. Check your .env file.");
-      Swal.fire({
-        position: "center",
-        icon: "error",
-        title: "Configuration error. Please contact the administrator.",
-        showConfirmButton: false,
-        timer: 2000,
-      });
-      return;
-    }
-    emailjs.init({ publicKey: import.meta.env.VITE_public_key });
+    emailjs.init({ publicKey: public_key });
   }, []);
 
   useGSAP(() => {
@@ -79,7 +70,7 @@ const ContactMe = () => {
     e.preventDefault();
 
     // Validate environment variables
-    if (!import.meta.env.VITE_service_id || !import.meta.env.VITE_template_id || !import.meta.env.VITE_public_key) {
+    if (!service_id || !template_id || !public_key) {
       Swal.fire({
         position: "center",
         icon: "error",
@@ -88,9 +79,9 @@ const ContactMe = () => {
         timer: 2000,
       });
       console.error("Missing EmailJS configuration:", {
-        service_id: import.meta.env.VITE_service_id,
-        template_id: import.meta.env.VITE_template_id,
-        public_key: import.meta.env.VITE_public_key,
+        service_id: service_id,
+        template_id: template_id,
+        public_key: public_key,
       });
       return;
     }
