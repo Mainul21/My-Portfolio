@@ -28,12 +28,12 @@ const Projects = () => {
       gitLink: "https://github.com/Mainul21/Book-review",
     },
     {
-      name: "King's Estate",
+      name: "Core Banking System",
       description:
-        "A MERN stack website for property dealings. Frontend completed, backend in progress.",
-      image: "https://i.ibb.co.com/qBkNctx/Screenshot-2024-12-10-202728.png",
-      liveLink: "https://kings-estate.web.app/",
-      gitLink: "https://github.com/Mainul21/Kings-Estate",
+        "An academic prototype of a core banking system built using PERN stack, featuring user authentication, account management, and transaction processing, loan management and more.",
+      image: "https://i.ibb.co.com/nNT88B51/Screenshot-2025-03-19-115303.png",
+      liveLink: "https://core-banking-system-850t.onrender.com",
+      gitLink: "https://github.com/Mainul21/Core-Banking-System",
     },
     {
       name: "Snake Game",

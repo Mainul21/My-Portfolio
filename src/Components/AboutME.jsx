@@ -48,7 +48,7 @@ const AboutME = ({ scroll }) => {
             />
           </div>
           <div className="flex flex-col sm:flex-row gap-4">
-            <a href="/Mainul_Hossain_Chisty_Resume.pdf" download="Mainul's Resume">
+            <a href="/MAINUL_HOSSAIN_CHISTY_Resume.pdf" download="Mainul's Resume">
               <button className="flex items-center justify-center gap-2 bg-amber-400 text-gray-900 font-semibold py-3 px-6 rounded-lg hover:bg-amber-500 transition-colors duration-300">
                 Download CV <LiaFileDownloadSolid className="text-xl" />
               </button>
@@ -81,8 +81,8 @@ const AboutME = ({ scroll }) => {
         <div ref={animeRef} className="relative flex justify-center">
           <img
             ref={imgRef}
-            className="rounded-2xl shadow-lg max-w-[150px] md:max-w-[250px] lg:max-w-[250px] object-cover opacity-0"
-            src="https://i.ibb.co.com/sqDYKQ0/20220420072822-IMG-9177-removebg-preview.png"
+            className="rounded-2xl shadow-lg max-w-[200px] md:max-w-[300px] lg:max-w-[300px] object-cover opacity-0 mb-4"
+            src="https://i.ibb.co.com/Z6ryGzYk/formal-photo-removebg-preview.png"
             alt="Mainul's portrait"
           />
         </div>
