@@ -69,27 +69,33 @@ const Education = () => {
   }, [hovered]);
 
   return (
-    <div className="md:px-10 md:py-10 py-5 space-y-5 border-b border-gray-800 mb-5">
-      <div className="p-4 mb-3">
-        <h1 className="md:text-5xl text-3xl font-bold text-center">
-          Educational <span className="text-amber-500">Institutes</span>
-        </h1>
-      </div>
-      <div className="flex flex-row items-stretch overflow-hidden">
-        {institutes.map((institute, index) => (
-          <div
-            key={index}
-            ref={(el) => (wrappers.current[index] = el)}
-            onMouseEnter={() => setHovered(index)}
-            onMouseLeave={() => setHovered(-1)}
-            className="transition-all duration-500 px-2"
-            style={{ width: "33.33%", minWidth: 0 }}
-          >
-            <Institute institute={institute} isHovered={hovered === index} />
+    <section className="bg-dark-bg py-20 px-6 md:px-12 lg:px-20 border-b border-gray-800">
+      <div className="max-w-7xl mx-auto space-y-12">
+        <div className="flex flex-col items-center gap-4">
+          <div className="flex items-center gap-2 text-accent-teal font-bold tracking-widest text-sm uppercase">
+            <span className="text-lg">✖</span> EDUCATION
           </div>
-        ))}
+          <h2 className="text-3xl md:text-5xl font-bold text-white text-center">
+            Educational <span className="text-accent-teal">Institutes</span>
+          </h2>
+        </div>
+        
+        <div className="flex flex-col md:flex-row items-stretch gap-6 h-[500px]">
+          {institutes.map((institute, index) => (
+            <div
+              key={index}
+              ref={(el) => (wrappers.current[index] = el)}
+              onMouseEnter={() => setHovered(index)}
+              onMouseLeave={() => setHovered(-1)}
+              className="relative rounded-2xl overflow-hidden cursor-pointer border border-white/5 transition-all duration-500"
+              style={{ width: "33.33%", minWidth: 0 }}
+            >
+              <Institute institute={institute} isHovered={hovered === index} />
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

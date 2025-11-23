@@ -18,20 +18,53 @@ const App = () => {
     contact: useRef(null),
     experience: useRef(null),
   };
+  const smoothScrollTo = (targetPosition, duration = 1000) => {
+    const startPosition = window.pageYOffset;
+    const distance = targetPosition - startPosition;
+    let startTime = null;
+
+    const easeInOutCubic = (t) => {
+      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    };
+
+    const animation = (currentTime) => {
+      if (startTime === null) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+      const ease = easeInOutCubic(progress);
+      
+      window.scrollTo(0, startPosition + distance * ease);
+      
+      if (timeElapsed < duration) {
+        requestAnimationFrame(animation);
+      }
+    };
+
+    requestAnimationFrame(animation);
+  };
+
   const scrollToSection = (section) => {
-    sectionRef[section].current.scrollIntoView({ behavior: "smooth" });
+    const element = sectionRef[section].current;
+    if (element) {
+      const yOffset = -80;
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      smoothScrollTo(y, 800);
+    }
   };
 
   const scroll = () => {
-    detailsRef.current.scrollIntoView({ behavior: "smooth" });
+    const element = detailsRef.current;
+    if (element) {
+      const yOffset = -80;
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      smoothScrollTo(y, 800);
+    }
   };
 
   return (
-    <div className="bg-gray-900">
-      <div className="">
-        <Header scrollToSection={scrollToSection}></Header>
-      </div>
-      <div className="w-11/12 mx-auto space-y-5">
+    <div className="min-h-screen">
+      <Header scrollToSection={scrollToSection} scroll={scroll} />
+      <div className="pt-24 w-11/12 mx-auto space-y-20">
         <AboutME scroll={scroll}></AboutME>
         <div ref={detailsRef}>
           <MyDetails></MyDetails>

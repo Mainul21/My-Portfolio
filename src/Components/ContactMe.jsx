@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import { FaHeadset } from "react-icons/fa6";
+import { FaPaperPlane, FaEnvelope, FaLinkedinIn, FaGithub, FaInstagram } from "react-icons/fa6";
 import Typewriter from "react-ts-typewriter";
 import emailjs from "@emailjs/browser";
 import Swal from "sweetalert2";
@@ -11,197 +11,160 @@ gsap.registerPlugin(ScrollTrigger);
 
 const ContactMe = () => {
   const formRef = useRef(null);
-  const headingRef = useRef(null);
-  const typewriterRef = useRef(null);
-  const inputsRef = useRef(null);
-  const [typewriterText, setTypewriterText] = useState("Thank you for getting in touch!");
+  const containerRef = useRef(null);
+  const [typewriterText, setTypewriterText] = useState("Let's build something amazing together!");
+  
   const public_key = import.meta.env.VITE_public_key;
   const service_id = import.meta.env.VITE_service_id;
   const template_id = import.meta.env.VITE_template_id;
-  // Initialize EmailJS
+
   useEffect(() => {
     emailjs.init({ publicKey: public_key });
   }, []);
 
   useGSAP(() => {
-    gsap.from(headingRef.current, {
-      y: -30,
-      opacity: 0,
-      duration: 1,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: headingRef.current,
-        start: "top 85%",
-        end: "bottom 15%",
-        toggleActions: "play none none reverse",
-      },
-    });
-
-    gsap.from(typewriterRef.current, {
-      opacity: 0,
-      duration: 1,
-      delay: 0.5,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: typewriterRef.current,
-        start: "top 85%",
-        end: "bottom 15%",
-        toggleActions: "play none none reverse",
-      },
-    });
-
-    gsap.from(inputsRef.current.children, {
-      y: 20,
+    gsap.from(containerRef.current.children, {
+      y: 30,
       opacity: 0,
       duration: 1,
       stagger: 0.2,
-      delay: 0.8,
       ease: "power3.out",
       scrollTrigger: {
-        trigger: inputsRef.current,
-        start: "top 85%",
-        end: "bottom 15%",
-        toggleActions: "play none none reverse",
-      },
+        trigger: containerRef.current,
+        start: "top 80%",
+      }
     });
-  }, []);
+  }, { scope: containerRef });
 
   const sendEmail = (e) => {
     e.preventDefault();
 
-    // Validate environment variables
     if (!service_id || !template_id || !public_key) {
       Swal.fire({
-        position: "center",
         icon: "error",
-        title: "Configuration error. Please contact the administrator.",
-        showConfirmButton: false,
-        timer: 2000,
-      });
-      console.error("Missing EmailJS configuration:", {
-        service_id: service_id,
-        template_id: template_id,
-        public_key: public_key,
+        title: "Configuration Error",
+        text: "Please contact the administrator.",
+        background: "#1a1f25",
+        color: "#fff"
       });
       return;
     }
 
-    // Validate email format
-    const emailInput = formRef.current.querySelector('input[name="email"]').value;
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput)) {
-      Swal.fire({
-        position: "center",
-        icon: "error",
-        title: "Please enter a valid email address.",
-        showConfirmButton: false,
-        timer: 2000,
+    emailjs.sendForm(service_id, template_id, formRef.current)
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Message Sent!",
+          text: "I'll get back to you soon.",
+          background: "#1a1f25",
+          color: "#fff",
+          confirmButtonColor: "#4fd1c5"
+        });
+        formRef.current.reset();
+      }, (error) => {
+        console.error("EmailJS Error:", error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong. Please try again.",
+          background: "#1a1f25",
+          color: "#fff"
+        });
       });
-      return;
-    }
-
-    // Log form data for debugging
-    console.log("Form data:", Object.fromEntries(new FormData(formRef.current)));
-
-    emailjs
-      .sendForm(
-        import.meta.env.VITE_service_id,
-        import.meta.env.VITE_template_id,
-        formRef.current
-      )
-      .then(
-        () => {
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Email Sent! I'll get back to you soon.",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          setTypewriterText("Message sent successfully!");
-          formRef.current.reset();
-          // Reset typewriter text after 5 seconds
-          setTimeout(() => {
-            setTypewriterText("Thank you for getting in touch!");
-          }, 5000);
-        },
-        (error) => {
-          console.error("EmailJS Error:", error);
-          let errorMessage = "Failed to send email. Please try again.";
-          if (error.status === 422 && error.text.includes("recipients address is empty")) {
-            errorMessage = "Recipient email address is missing in the template. Please contact the administrator.";
-          }
-          Swal.fire({
-            position: "center",
-            icon: "error",
-            title: errorMessage,
-            showConfirmButton: false,
-            timer: 2000,
-          });
-        }
-      );
   };
 
   return (
-    <section className="bg-gray-900 py-12 px-6 md:px-12 lg:px-20 border-b border-gray-800">
-      <div className="max-w-7xl mx-auto">
-        <h1
-          ref={headingRef}
-          className="text-3xl md:text-5xl font-extrabold text-center text-white flex items-center justify-center gap-2 mb-12"
-        >
-          <FaHeadset className="text-blue-500" /> Get in{" "}
-          <span className="text-amber-400">Touch</span>
-        </h1>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          <div ref={typewriterRef} className="flex items-center justify-center">
-            <h2 className="text-2xl md:text-4xl font-bold text-gray-300 text-center">
-              <Typewriter
-                text={typewriterText}
-                delay={2000}
-                speed={50}
-              />
-            </h2>
+    <section ref={containerRef} className="bg-dark-bg py-20 px-6 md:px-12 lg:px-20 border-b border-gray-800">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
+        
+        {/* Left Column: Info */}
+        <div className="space-y-8">
+          <div className="flex items-center gap-2 text-accent-teal font-bold tracking-widest text-sm uppercase">
+            <span className="text-lg">✖</span> CONTACT
           </div>
-          <form
-            ref={formRef}
-            onSubmit={sendEmail}
-            className="bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-2xl hover:shadow-emerald-500/50 transition-shadow duration-300"
-          >
-            <div ref={inputsRef} className="space-y-4">
+          
+          <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">
+            Let's <span className="text-accent-teal">talk?</span>
+          </h2>
+
+          <div className="text-xl text-gray-400 h-20">
+            <Typewriter
+              text={typewriterText}
+              loop={true}
+              speed={50}
+              delay={2000}
+            />
+          </div>
+
+          <div className="space-y-4">
+            <p className="text-gray-400">
+              Feel free to reach out for collaborations, opportunities, or just a friendly chat.
+            </p>
+            
+            <div className="flex items-center gap-4 text-white hover:text-accent-teal transition-colors">
+              <FaEnvelope className="text-xl" />
+              <a href="mailto:mainul.hossain.chisty@g.bracu.ac.bd" className="text-lg">mainul.hossain.chisty@g.bracu.ac.bd</a>
+            </div>
+          </div>
+
+          <div className="flex gap-4 pt-4">
+            <a href="https://www.linkedin.com/in/mainulhossainchisty/" target="_blank" rel="noopener noreferrer" className="p-3 bg-card-bg rounded-lg text-white hover:text-accent-teal hover:bg-white/5 transition-all">
+              <FaLinkedinIn className="text-xl" />
+            </a>
+            <a href="https://github.com/Mainul21" target="_blank" rel="noopener noreferrer" className="p-3 bg-card-bg rounded-lg text-white hover:text-accent-teal hover:bg-white/5 transition-all">
+              <FaGithub className="text-xl" />
+            </a>
+            <a href="https://www.instagram.com/mainul_irl?igsh=MWdlMHYzbXRqaHdhcA==" target="_blank" rel="noopener noreferrer" className="p-3 bg-card-bg rounded-lg text-white hover:text-accent-teal hover:bg-white/5 transition-all">
+              <FaInstagram className="text-xl" />
+            </a>
+          </div>
+        </div>
+
+        {/* Right Column: Form */}
+        <div className="bg-card-bg p-8 rounded-2xl border border-white/5 shadow-xl">
+          <form ref={formRef} onSubmit={sendEmail} className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-400 mb-2">Name</label>
               <input
                 type="text"
-                placeholder="Your Name"
-                name="name" // Ensure this matches the EmailJS template variable
-                className="w-full p-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400"
+                name="name"
                 required
+                className="w-full bg-dark-bg border border-gray-700 rounded-lg p-3 text-white focus:border-accent-teal focus:ring-1 focus:ring-accent-teal outline-none transition-all"
+                placeholder="John Doe"
               />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-400 mb-2">Email</label>
               <input
                 type="email"
-                placeholder="Email Address"
-                name="email" // Ensure this matches the EmailJS template variable
-                className="w-full p-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400"
+                name="email"
                 required
+                className="w-full bg-dark-bg border border-gray-700 rounded-lg p-3 text-white focus:border-accent-teal focus:ring-1 focus:ring-accent-teal outline-none transition-all"
+                placeholder="john@example.com"
               />
-              <input
-                type="tel"
-                placeholder="Phone Number (Optional)"
-                name="number" // Ensure this matches the EmailJS template variable
-                className="w-full p-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400"
-              />
-              <textarea
-                placeholder="Your Message"
-                name="message" // Ensure this matches the EmailJS template variable
-                className="w-full p-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400 min-h-[120px]"
-                required
-              ></textarea>
-              <button
-                type="submit"
-                className="w-full bg-amber-400 text-gray-900 font-semibold py-3 rounded-lg hover:bg-amber-500 transition-colors duration-300"
-              >
-                Submit
-              </button>
             </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-400 mb-2">Message</label>
+              <textarea
+                name="message"
+                required
+                rows="4"
+                className="w-full bg-dark-bg border border-gray-700 rounded-lg p-3 text-white focus:border-accent-teal focus:ring-1 focus:ring-accent-teal outline-none transition-all resize-none"
+                placeholder="Hello, I'd like to talk about..."
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              className="w-full bg-accent-teal text-dark-bg font-bold py-4 rounded-lg hover:bg-white transition-colors duration-300 flex items-center justify-center gap-2"
+            >
+              Send Message <FaPaperPlane />
+            </button>
           </form>
         </div>
+
       </div>
     </section>
   );

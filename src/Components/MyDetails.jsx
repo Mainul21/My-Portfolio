@@ -1,83 +1,101 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
-import { IoManSharp } from "react-icons/io5";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { FaLinkedinIn, FaGithub, FaEnvelope } from "react-icons/fa6";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const MyDetails = () => {
-  const textRef = useRef(null);
-  const imgRef = useRef(null);
+  const containerRef = useRef(null);
+  const leftColRef = useRef(null);
+  const rightColRef = useRef(null);
 
   useGSAP(() => {
-    gsap.from(textRef.current, {
-      y: 50,
-      opacity: 0,
-      duration: 1.5,
-      ease: "power3.out",
+    const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: textRef.current,
-        start: "top 85%",
-        end: "bottom 10%",
+        trigger: containerRef.current,
+        start: "top 80%",
+        end: "bottom 20%",
         toggleActions: "play none none reverse",
-      },
+      }
     });
 
-    gsap.from(imgRef.current, {
-      scale: 0.8,
+    tl.from(leftColRef.current, {
+      x: -50,
       opacity: 0,
-      duration: 1.5,
+      duration: 1,
       ease: "power3.out",
-      scrollTrigger: {
-        trigger: imgRef.current,
-        start: "top 85%",
-        end: "bottom 10%",
-        toggleActions: "play none none reverse",
-      },
-    });
-  });
+    })
+    .from(rightColRef.current, {
+      x: 50,
+      opacity: 0,
+      duration: 1,
+      ease: "power3.out",
+    }, "-=0.8");
+  }, { scope: containerRef });
 
   return (
-    <section className=" py-16 px-6 md:px-12 lg:px-20 border-b border-gray-800 bg-gray-900">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-center text-white mb-12 flex items-center justify-center gap-2">
-          <IoManSharp className="text-amber-400" /> About{" "}
-          <span className="text-amber-400">Me</span>
-        </h1>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="flex justify-center">
-            <img
-              ref={imgRef}
-              className="rounded-2xl shadow-lg transform hover:scale-105 transition-transform duration-300"
-              height={350}
-              width={400}
-              src="https://i.ibb.co.com/nwJPMqh/Mainul.jpg"
-              alt="Mainul's portrait"
-            />
+    <section ref={containerRef} className="py-20 px-6 md:px-12 lg:px-20 bg-card-bg/50 relative">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+        
+        {/* Left Column: Profile Card */}
+        <div ref={leftColRef} className="md:col-span-1 flex flex-col items-center text-center space-y-6">
+          <div className="relative w-48 h-48 rounded-full p-1 bg-gradient-to-br from-accent-teal to-blue-600">
+            <div className="w-full h-full rounded-full overflow-hidden border-4 border-card-bg">
+              <img
+                className="w-full h-full object-cover"
+                src="https://i.ibb.co.com/nwJPMqh/Mainul.jpg"
+                alt="Mainul's portrait"
+              />
+            </div>
           </div>
-          <div ref={textRef} className="space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-white">
-              Hi! I'm <span className="text-amber-400">Mainul</span>
-            </h2>
-            <h3 className="text-xl md:text-2xl font-semibold text-gray-300">
-              Computer Science Student | Web Developer
-            </h3>
-            <p className="text-gray-400 text-lg leading-relaxed text-justify">
-              I'm a dedicated Computer Science student at BRAC University, pursuing a Bachelor's degree. My passion lies in{" "}
-              <span className="text-amber-400 hover:text-amber-300 transition-colors">web development</span>,{" "}
-              <span className="text-amber-400 hover:text-amber-300 transition-colors">machine learning</span>, and{" "}
-              <span className="text-amber-400 hover:text-amber-300 transition-colors">competitive programming</span>. 
-              I specialize in <span className="text-amber-400 hover:text-amber-300 transition-colors">Python</span>, with proficiency in{" "}
-              <span className="text-amber-400 hover:text-amber-300 transition-colors">Kotlin</span> and{" "}
-              <span className="text-amber-400 hover:text-amber-300 transition-colors">C</span> from my coursework. 
-              For web development, I leverage the <span className="text-amber-400 hover:text-amber-300 transition-colors">MERN</span> stack to create dynamic, scalable applications.
+          
+          <div>
+            <h3 className="text-xl font-bold text-white">Md. Mainul Hossain Chisty</h3>
+            <div className="flex justify-center gap-4 mt-4">
+              <a href="mailto:mainul.hossain.chisty@g.bracu.ac.bd" className="p-2 bg-dark-bg rounded-lg text-text-secondary hover:text-accent-teal transition-colors">
+                <FaEnvelope />
+              </a>
+              <a href="https://github.com/Mainul21" target="_blank" rel="noopener noreferrer" className="p-2 bg-dark-bg rounded-lg text-text-secondary hover:text-accent-teal transition-colors">
+                <FaGithub />
+              </a>
+              <a href="https://www.linkedin.com/in/mainulhossainchisty/" target="_blank" rel="noopener noreferrer" className="p-2 bg-dark-bg rounded-lg text-text-secondary hover:text-accent-teal transition-colors">
+                <FaLinkedinIn />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column: Content */}
+        <div ref={rightColRef} className="md:col-span-2 space-y-8">
+          <div className="flex items-center gap-2 text-accent-teal font-bold tracking-widest text-sm uppercase">
+            <span className="text-lg">✖</span> ABOUT
+          </div>
+
+          <h2 className="text-3xl md:text-5xl font-bold text-white">
+            My <span className="text-accent-teal">Details</span>
+          </h2>
+
+          <div className="space-y-4 text-text-secondary leading-relaxed text-lg">
+            <p>
+              I'm a dedicated Computer Science student at BRAC University, pursuing a Bachelor's degree. My passion lies in <span className="text-accent-teal">web development</span>, <span className="text-accent-teal">machine learning</span>, and <span className="text-accent-teal">competitive programming</span>.
             </p>
-            <p className="text-lg text-amber-400 font-medium">
+            <p>
+              I specialize in <span className="text-accent-teal">Python</span>, with proficiency in <span className="text-accent-teal">Kotlin</span> and <span className="text-accent-teal">C</span> from my coursework. For web development, I leverage the <span className="text-accent-teal">MERN</span> stack to create dynamic, scalable applications.
+            </p>
+            <p>
+              Always eager to learn new technologies and take on challenging projects that push my boundaries.
+            </p>
+          </div>
+
+          <div className="pt-4 border-t border-white/5">
+             <p className="text-sm text-gray-500">
               📍 Location: Dhaka, Bangladesh
             </p>
           </div>
         </div>
+
       </div>
     </section>
   );

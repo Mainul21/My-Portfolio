@@ -1,23 +1,6 @@
 import ProjectCard from "./ProjectCard";
-import { useGSAP } from "@gsap/react";
-import { gsap } from "gsap";
-import { useRef } from "react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-gsap.registerPlugin(ScrollTrigger);
+
 const Projects = () => {
-  const projectsRef = useRef(null);
-
-  useGSAP(() => {
-    gsap.from(projectsRef.current.children, {
-      y: 50,
-      opacity: 0,
-      duration: 1,
-      stagger: 0.2,
-      ease: "power3.out",
-      delay: 0.5,
-    });
-  });
-
   const projects = [
     {
       name: "Book Review",
@@ -50,15 +33,18 @@ const Projects = () => {
   ];
 
   return (
-    <section className="bg-gray-900 py-12 px-6 md:px-12 lg:px-20 border-b border-gray-800">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl md:text-5xl font-extrabold text-center text-white mb-12">
-          Projects & <span className="text-amber-400">Work</span>
-        </h1>
-        <div
-          ref={projectsRef}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
-        >
+    <section className="bg-dark-bg py-20 px-6 md:px-12 lg:px-20 border-b border-gray-800">
+      <div className="max-w-7xl mx-auto space-y-12">
+        <div className="flex flex-col items-center gap-4">
+          <div className="flex items-center gap-2 text-accent-teal font-bold tracking-widest text-sm uppercase">
+            <span className="text-lg">✖</span> PROJECTS
+          </div>
+          <h2 className="text-3xl md:text-5xl font-bold text-white text-center">
+            Projects & <span className="text-accent-teal">Work</span>
+          </h2>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projects.map((project, index) => (
             <ProjectCard key={index} project={project} />
           ))}
