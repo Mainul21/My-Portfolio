@@ -10,6 +10,7 @@ const MyDetails = () => {
   const containerRef = useRef(null);
   const leftColRef = useRef(null);
   const rightColRef = useRef(null);
+  const barRefs = useRef([]);
 
   useGSAP(() => {
     const tl = gsap.timeline({
@@ -33,10 +34,29 @@ const MyDetails = () => {
       duration: 1,
       ease: "power3.out",
     }, "-=0.8");
+
+    // Animate Language Bars
+    barRefs.current.forEach((bar) => {
+      if (bar) {
+        gsap.fromTo(bar, 
+          { width: "0%" },
+          { 
+            width: bar.dataset.width, 
+            duration: 3, 
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: bar,
+              start: "top 90%",
+            }
+          }
+        );
+      }
+    });
+
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="py-20 px-6 md:px-12 lg:px-20 bg-card-bg/50 relative">
+    <section ref={containerRef} className="py-20 px-6 md:px-12 lg:px-20 relative">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
         
         {/* Left Column: Profile Card */}
@@ -87,6 +107,63 @@ const MyDetails = () => {
             <p>
               Always eager to learn new technologies and take on challenging projects that push my boundaries.
             </p>
+          </div>
+
+          {/* Languages Section */}
+          <div className="space-y-4">
+            <h3 className="text-2xl font-bold text-white">Languages</h3>
+            <div className="space-y-3">
+              <div>
+                <div className="flex justify-between text-text-secondary mb-1">
+                  <span>Bengali</span>
+                  <span>Native</span>
+                </div>
+                <div className="w-full bg-gray-700 rounded-full h-2.5">
+                  <div 
+                    ref={el => barRefs.current[0] = el}
+                    data-width="100%"
+                    className="bg-accent-teal h-2.5 rounded-full" 
+                    style={{ width: "0%" }}
+                  ></div>
+                </div>
+              </div>
+              <div>
+                <div className="flex justify-between text-text-secondary mb-1">
+                  <span>English</span>
+                  <span>Fluent</span>
+                </div>
+                <div className="w-full bg-gray-700 rounded-full h-2.5">
+                  <div 
+                    ref={el => barRefs.current[1] = el}
+                    data-width="70%"
+                    className="bg-accent-teal h-2.5 rounded-full" 
+                    style={{ width: "0%" }}
+                  ></div>
+                </div>
+              </div>
+          </div>
+          </div>
+
+          {/* GitHub Stats Section */}
+          <div className="space-y-6">
+            <h3 className="text-2xl font-bold text-white">GitHub Stats</h3>
+            {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <img 
+                src="https://github-readme-stats.vercel.app/api?username=Mainul21&show_icons=true&theme=dark&hide_border=true" 
+                alt="Mainul's GitHub Stats" 
+                className="w-full"
+              />
+              <img 
+                src="https://github-readme-stats.vercel.app/api/top-langs/?username=Mainul21&layout=compact&theme=dark&hide_border=true" 
+                alt="Mainul's Top Languages" 
+                className="w-full"
+              />
+            </div> */}
+            <img 
+              src="https://github-readme-streak-stats.herokuapp.com/?user=Mainul21&theme=dark&hide_border=true&background=00000000" 
+              alt="Mainul's GitHub Streak" 
+              className="w-full"
+            />
           </div>
 
           <div className="pt-4 border-t border-white/5">

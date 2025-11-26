@@ -9,6 +9,8 @@ import Education from "./Components/Education/Education";
 import ContactMe from "./Components/ContactMe";
 import Experience from "./Components/Experience/Experience";
 
+import ParallaxBackground from "./Components/ParallaxBackground";
+
 const App = () => {
   const detailsRef = useRef(null);
   const sectionRef = {
@@ -62,8 +64,10 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen">
-      <Header scrollToSection={scrollToSection} scroll={scroll} />
+    <div className="min-h-screen relative">
+      <ParallaxBackground />
+      <div className="relative z-10">
+        <Header scrollToSection={scrollToSection} scroll={scroll} />
       <div className="pt-24 w-11/12 mx-auto space-y-20">
         <AboutME scroll={scroll}></AboutME>
         <div ref={detailsRef}>
@@ -86,6 +90,7 @@ const App = () => {
         </div>
       </div>
       <Footer scrollToSection={scrollToSection} scroll={scroll}></Footer>
+      </div>
     </div>
   );
 };

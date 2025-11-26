@@ -33,7 +33,7 @@ const Experience = () => {
   });
 
   return (
-    <section className="bg-gray-900 py-12 px-6 md:px-12 lg:px-20 border-b border-gray-800">
+    <section className="py-12 px-6 md:px-12 lg:px-20 border-b border-gray-800">
       <div className="max-w-7xl mx-auto">
         <h1
           ref={headingRef}

@@ -29,7 +29,7 @@ const AboutME = ({ scroll }) => {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="min-h-[80vh] flex items-center justify-center py-12 px-6 md:px-12 lg:px-20 bg-dark-bg relative overflow-hidden">
+    <section ref={containerRef} className="min-h-[80vh] flex items-center justify-center py-12 px-6 md:px-12 lg:px-20 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-accent-teal/5 rounded-full blur-[100px]"></div>

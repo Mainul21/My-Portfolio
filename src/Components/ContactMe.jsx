@@ -74,7 +74,7 @@ const ContactMe = () => {
   };
 
   return (
-    <section ref={containerRef} className="bg-dark-bg py-20 px-6 md:px-12 lg:px-20 border-b border-gray-800">
+    <section ref={containerRef} className="py-20 px-6 md:px-12 lg:px-20 border-b border-gray-800">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
         
         {/* Left Column: Info */}

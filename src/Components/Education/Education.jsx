@@ -69,7 +69,7 @@ const Education = () => {
   }, [hovered]);
 
   return (
-    <section className="bg-dark-bg py-20 px-6 md:px-12 lg:px-20 border-b border-gray-800">
+    <section className="py-20 px-6 md:px-12 lg:px-20 border-b border-gray-800">
       <div className="max-w-7xl mx-auto space-y-12">
         <div className="flex flex-col items-center gap-4">
           <div className="flex items-center gap-2 text-accent-teal font-bold tracking-widest text-sm uppercase">
