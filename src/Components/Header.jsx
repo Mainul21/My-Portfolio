@@ -27,7 +27,7 @@ const Header = ({ scrollToSection, scroll }) => {
               ))}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl text-accent-teal font-bold tracking-wider flex items-center gap-2">
+          <a onClick={() => scrollToSection('about')} className="btn btn-ghost text-xl text-accent-teal font-bold tracking-wider flex items-center gap-2 cursor-pointer">
             <SiAnkermake /> Mainul Hossain
           </a>
         </div>

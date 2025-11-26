@@ -19,6 +19,7 @@ const App = () => {
     education: useRef(null),
     contact: useRef(null),
     experience: useRef(null),
+    about: useRef(null),
   };
   const smoothScrollTo = (targetPosition, duration = 1000) => {
     const startPosition = window.pageYOffset;
@@ -69,7 +70,9 @@ const App = () => {
       <div className="relative z-10">
         <Header scrollToSection={scrollToSection} scroll={scroll} />
       <div className="pt-24 w-11/12 mx-auto space-y-20">
-        <AboutME scroll={scroll}></AboutME>
+        <div ref={sectionRef.about}>
+          <AboutME scroll={scroll}></AboutME>
+        </div>
         <div ref={detailsRef}>
           <MyDetails></MyDetails>
         </div>
