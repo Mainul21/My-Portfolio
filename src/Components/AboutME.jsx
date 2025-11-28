@@ -68,7 +68,7 @@ const AboutME = ({ scroll }) => {
 
           <div className="flex flex-wrap gap-4 pt-4">
             <a 
-              href="/MAINUL_HOSSAIN_CHISTY_Resume.pdf" 
+              href="MAINUL_HOSSAIN_CHISTY_Resume.pdf" 
               download="MAINUL_HOSSAIN_CHISTY_Resume.pdf"
               className="btn btn-outline border-accent-teal text-accent-teal hover:bg-accent-teal hover:text-dark-bg hover:border-accent-teal rounded-none px-8 uppercase tracking-wider text-sm font-bold transition-all duration-300 flex items-center gap-2"
             >
