@@ -70,25 +70,25 @@ const App = () => {
       <div className="relative z-10">
         <Header scrollToSection={scrollToSection} scroll={scroll} />
       <div className="pt-24 w-11/12 mx-auto space-y-20">
-        <div ref={sectionRef.about}>
+        <div id="about" ref={sectionRef.about}>
           <AboutME scroll={scroll}></AboutME>
         </div>
         <div ref={detailsRef}>
           <MyDetails></MyDetails>
         </div>
-        <div ref={sectionRef.skills}>
+        <div id="skills" ref={sectionRef.skills}>
           <Skills></Skills>
         </div>
-        <div ref={sectionRef.experience}>
+        <div id="experience" ref={sectionRef.experience}>
           <Experience></Experience>
         </div>
-        <div ref={sectionRef.projects}>
+        <div id="projects" ref={sectionRef.projects}>
           <Projects></Projects>
         </div>
-        <div ref={sectionRef.education}>
+        <div id="education" ref={sectionRef.education}>
           <Education></Education>
         </div>
-        <div ref={sectionRef.contact}>
+        <div id="contact" ref={sectionRef.contact}>
           <ContactMe></ContactMe>
         </div>
       </div>

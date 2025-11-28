@@ -28,44 +28,65 @@ const Education = () => {
       location: "Kha 224, Bir Uttam Rafiqul Islam Avenue, Merul Badda, Dhaka",
       degree: 'Bachelors of Computer Science',
       Year: "2021 - Present",
-      Result: "3.34/4.00",
+      Result: "3.36/4.00",
       image: 'https://i.ibb.co.com/hVd4DS6/brac.jpg'
     },
   ];
 
   useEffect(() => {
-    if (hovered === -1) {
-      wrappers.current.forEach((el) => {
-        if (el) {
-          gsap.to(el, {
-            width: "33.33%",
-            opacity: 1,
-            duration: 0.5,
-            ease: "power2.inOut",
+    let ctx = gsap.context(() => {
+      let mm = gsap.matchMedia();
+
+      mm.add("(min-width: 768px)", () => {
+        // Desktop Animation
+        if (hovered === -1) {
+          wrappers.current.forEach((el) => {
+            if (el) {
+              gsap.to(el, {
+                width: "33.33%",
+                opacity: 1,
+                duration: 0.5,
+                ease: "power2.inOut",
+              });
+            }
+          });
+        } else {
+          wrappers.current.forEach((el, i) => {
+            if (el) {
+              if (i === hovered) {
+                gsap.to(el, {
+                  width: "100%",
+                  opacity: 1,
+                  duration: 0.5,
+                  ease: "power2.inOut",
+                });
+              } else {
+                gsap.to(el, {
+                  width: "0%",
+                  opacity: 0,
+                  duration: 0.5,
+                  ease: "power2.inOut",
+                });
+              }
+            }
           });
         }
       });
-    } else {
-      wrappers.current.forEach((el, i) => {
-        if (el) {
-          if (i === hovered) {
-            gsap.to(el, {
+
+      mm.add("(max-width: 767px)", () => {
+        // Mobile: Reset to default state
+        wrappers.current.forEach((el) => {
+          if (el) {
+            gsap.set(el, {
               width: "100%",
               opacity: 1,
-              duration: 0.5,
-              ease: "power2.inOut",
-            });
-          } else {
-            gsap.to(el, {
-              width: "0%",
-              opacity: 0,
-              duration: 0.5,
-              ease: "power2.inOut",
             });
           }
-        }
+        });
       });
-    }
+    }, wrappers);
+
+    return () => ctx.revert();
   }, [hovered]);
 
   return (
@@ -80,15 +101,15 @@ const Education = () => {
           </h2>
         </div>
         
-        <div className="flex flex-col md:flex-row items-stretch gap-6 h-[500px]">
+        <div className="flex flex-col md:flex-row items-stretch gap-6 h-auto md:h-[500px]">
           {institutes.map((institute, index) => (
             <div
               key={index}
               ref={(el) => (wrappers.current[index] = el)}
               onMouseEnter={() => setHovered(index)}
               onMouseLeave={() => setHovered(-1)}
-              className="relative rounded-2xl overflow-hidden cursor-pointer border border-white/5 transition-all duration-500"
-              style={{ width: "33.33%", minWidth: 0 }}
+              className="relative rounded-2xl overflow-hidden cursor-pointer border border-white/5 transition-all duration-500 w-full md:w-1/3 h-[300px] md:h-auto"
+              style={{ minWidth: 0 }}
             >
               <Institute institute={institute} isHovered={hovered === index} />
             </div>

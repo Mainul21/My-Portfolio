@@ -15,7 +15,7 @@ const ProjectCard = ({ project }) => {
       </figure>
       
       {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-dark-bg via-dark-bg/90 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-6 translate-y-4 group-hover:translate-y-0">
+      <div className="absolute inset-0 bg-gradient-to-t from-dark-bg via-dark-bg/90 to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-6 translate-y-0 md:translate-y-4 md:group-hover:translate-y-0">
         <h2 className="text-2xl font-bold text-white mb-2">{name}</h2>
         <p className="text-gray-300 text-sm mb-6 line-clamp-3">{description}</p>
         
