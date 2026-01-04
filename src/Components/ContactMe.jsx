@@ -13,7 +13,7 @@ const ContactMe = () => {
   const formRef = useRef(null);
   const containerRef = useRef(null);
   const [typewriterText, setTypewriterText] = useState("Let's build something amazing together!");
-  
+
   const public_key = import.meta.env.VITE_public_key;
   const service_id = import.meta.env.VITE_service_id;
   const template_id = import.meta.env.VITE_template_id;
@@ -76,13 +76,13 @@ const ContactMe = () => {
   return (
     <section ref={containerRef} className="py-20 px-6 md:px-12 lg:px-20 border-b border-gray-800">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
-        
+
         {/* Left Column: Info */}
         <div className="space-y-8">
           <div className="flex items-center gap-2 text-accent-teal font-bold tracking-widest text-sm uppercase">
             <span className="text-lg">✖</span> CONTACT
           </div>
-          
+
           <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">
             Let's <span className="text-accent-teal">talk?</span>
           </h2>
@@ -100,10 +100,10 @@ const ContactMe = () => {
             <p className="text-gray-400">
               Feel free to reach out for collaborations, opportunities, or just a friendly chat.
             </p>
-            
+
             <div className="flex items-center gap-4 text-white hover:text-accent-teal transition-colors">
               <FaEnvelope className="text-xl" />
-              <a href="mailto:mainul.hossain.chisty@g.bracu.ac.bd" className="text-lg">mainul.hossain.chisty@g.bracu.ac.bd</a>
+              <a href="mailto:mainul.hossain.chisty@gmail.com" className="text-lg">mainul.hossain.chisty@gmail.com</a>
             </div>
           </div>
 
@@ -133,7 +133,7 @@ const ContactMe = () => {
                 placeholder="John Doe"
               />
             </div>
-            
+
             <div>
               <label className="block text-sm font-medium text-gray-400 mb-2">Email</label>
               <input
