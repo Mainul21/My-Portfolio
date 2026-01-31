@@ -28,21 +28,21 @@ const MyDetails = () => {
       duration: 1,
       ease: "power3.out",
     })
-    .from(rightColRef.current, {
-      x: 50,
-      opacity: 0,
-      duration: 1,
-      ease: "power3.out",
-    }, "-=0.8");
+      .from(rightColRef.current, {
+        x: 50,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+      }, "-=0.8");
 
     // Animate Language Bars
     barRefs.current.forEach((bar) => {
       if (bar) {
-        gsap.fromTo(bar, 
+        gsap.fromTo(bar,
           { width: "0%" },
-          { 
-            width: bar.dataset.width, 
-            duration: 3, 
+          {
+            width: bar.dataset.width,
+            duration: 3,
             ease: "power2.out",
             scrollTrigger: {
               trigger: bar,
@@ -58,19 +58,19 @@ const MyDetails = () => {
   return (
     <section ref={containerRef} className="py-20 px-6 md:px-12 lg:px-20 relative">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
-        
+
         {/* Left Column: Profile Card */}
         <div ref={leftColRef} className="md:col-span-1 flex flex-col items-center text-center space-y-6">
           <div className="relative w-48 h-48 rounded-full p-1 bg-gradient-to-br from-accent-teal to-blue-600">
             <div className="w-full h-full rounded-full overflow-hidden border-4 border-card-bg">
               <img
                 className="w-full h-full object-cover"
-                src="https://i.ibb.co.com/nwJPMqh/Mainul.jpg"
+                src="https://i.ibb.co.com/DDZM6VBG/Media.jpg"
                 alt="Mainul's portrait"
               />
             </div>
           </div>
-          
+
           <div>
             <h3 className="text-xl font-bold text-white">Md. Mainul Hossain Chisty</h3>
             <div className="flex justify-center gap-4 mt-4">
@@ -119,10 +119,10 @@ const MyDetails = () => {
                   <span>Native</span>
                 </div>
                 <div className="w-full bg-gray-700 rounded-full h-2.5">
-                  <div 
+                  <div
                     ref={el => barRefs.current[0] = el}
                     data-width="100%"
-                    className="bg-accent-teal h-2.5 rounded-full" 
+                    className="bg-accent-teal h-2.5 rounded-full"
                     style={{ width: "0%" }}
                   ></div>
                 </div>
@@ -133,15 +133,15 @@ const MyDetails = () => {
                   <span>Fluent</span>
                 </div>
                 <div className="w-full bg-gray-700 rounded-full h-2.5">
-                  <div 
+                  <div
                     ref={el => barRefs.current[1] = el}
                     data-width="70%"
-                    className="bg-accent-teal h-2.5 rounded-full" 
+                    className="bg-accent-teal h-2.5 rounded-full"
                     style={{ width: "0%" }}
                   ></div>
                 </div>
               </div>
-          </div>
+            </div>
           </div>
 
           {/* GitHub Stats Section */}
@@ -159,15 +159,15 @@ const MyDetails = () => {
                 className="w-full"
               />
             </div> */}
-            <img 
-              src="https://github-readme-streak-stats.herokuapp.com/?user=Mainul21&theme=dark&hide_border=true&background=00000000" 
-              alt="Mainul's GitHub Streak" 
+            <img
+              src="https://github-readme-streak-stats.herokuapp.com/?user=Mainul21&theme=dark&hide_border=true&background=00000000"
+              alt="Mainul's GitHub Streak"
               className="w-full"
             />
           </div>
 
           <div className="pt-4 border-t border-white/5">
-             <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-500">
               📍 Location: Dhaka, Bangladesh
             </p>
           </div>
