@@ -1,0 +1,23 @@
+.mySwiper {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.mySwiper .swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 350px;
+    /* height: 400px; Height is handled by the card content */
+}
+
+@media (min-width: 768px) {
+    .mySwiper .swiper-slide {
+        width: 450px;
+    }
+}
+
+/* 
+   The default slideShadows might be too dark or not fit the theme. 
+   We can adjust opacity if needed, but let's stick to default for now as per image.
+*/
