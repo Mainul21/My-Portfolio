@@ -82,7 +82,7 @@ const MyDetails = () => {
         {/* Left Column: Profile Card */}
         <div
           ref={leftColRef}
-          className="md:col-span-1 flex flex-col items-center text-center space-y-6"
+          className="md:col-span-1 flex flex-col items-center text-center space-y-6 mt-16"
         >
           <div
             ref={profileCardRef}
