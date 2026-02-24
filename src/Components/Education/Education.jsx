@@ -1,10 +1,16 @@
 import { useState, useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import Institute from "./Institute";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Education = () => {
   const [hovered, setHovered] = useState(-1);
   const wrappers = useRef([]);
+  const containerRef = useRef(null);
+  const headingRef = useRef(null);
 
   const institutes = [
     {
@@ -33,20 +39,34 @@ const Education = () => {
     },
   ];
 
+  // Heading animation
+  useGSAP(() => {
+    gsap.from(headingRef.current?.children || [], {
+      y: 30,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.1,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top 80%",
+      }
+    });
+  }, { scope: containerRef });
+
   useEffect(() => {
     let ctx = gsap.context(() => {
       let mm = gsap.matchMedia();
 
       mm.add("(min-width: 768px)", () => {
-        // Desktop Animation
         if (hovered === -1) {
           wrappers.current.forEach((el) => {
             if (el) {
               gsap.to(el, {
                 width: "33.33%",
                 opacity: 1,
-                duration: 0.5,
-                ease: "power2.inOut",
+                duration: 0.6,
+                ease: "power3.inOut",
               });
             }
           });
@@ -57,15 +77,15 @@ const Education = () => {
                 gsap.to(el, {
                   width: "100%",
                   opacity: 1,
-                  duration: 0.5,
-                  ease: "power2.inOut",
+                  duration: 0.6,
+                  ease: "power3.inOut",
                 });
               } else {
                 gsap.to(el, {
                   width: "0%",
                   opacity: 0,
-                  duration: 0.5,
-                  ease: "power2.inOut",
+                  duration: 0.6,
+                  ease: "power3.inOut",
                 });
               }
             }
@@ -74,7 +94,6 @@ const Education = () => {
       });
 
       mm.add("(max-width: 767px)", () => {
-        // Mobile: Reset to default state
         wrappers.current.forEach((el) => {
           if (el) {
             gsap.set(el, {
@@ -90,25 +109,27 @@ const Education = () => {
   }, [hovered]);
 
   return (
-    <section className="py-20 px-6 md:px-12 lg:px-20 border-b border-gray-800">
+    <section ref={containerRef} className="py-20 px-6 md:px-12 lg:px-20 relative">
+      <div className="gradient-divider mb-20" />
       <div className="max-w-7xl mx-auto space-y-12">
-        <div className="flex flex-col items-center gap-4">
-          <div className="flex items-center gap-2 text-accent-teal font-bold tracking-widest text-sm uppercase">
-            <span className="text-lg">✖</span> EDUCATION
+        <div ref={headingRef} className="flex flex-col items-center gap-4">
+          <div className="section-label">
+            EDUCATION
           </div>
           <h2 className="text-3xl md:text-5xl font-bold text-white text-center">
-            Educational <span className="text-accent-teal">Institutes</span>
+            Educational <span className="gradient-text">Institutes</span>
           </h2>
+          <p className="text-text-secondary text-center max-w-lg">Where I built my academic foundation</p>
         </div>
-        
-        <div className="flex flex-col md:flex-row items-stretch gap-6 h-auto md:h-[500px]">
+
+        <div className="flex flex-col md:flex-row items-stretch gap-4 h-auto md:h-[500px]">
           {institutes.map((institute, index) => (
             <div
               key={index}
               ref={(el) => (wrappers.current[index] = el)}
               onMouseEnter={() => setHovered(index)}
               onMouseLeave={() => setHovered(-1)}
-              className="relative rounded-2xl overflow-hidden cursor-pointer border border-white/5 transition-all duration-500 w-full md:w-1/3 h-[300px] md:h-auto"
+              className="relative rounded-2xl overflow-hidden cursor-pointer border border-white/5 hover:border-accent-indigo/30 transition-all duration-700 w-full md:w-1/3 h-[300px] md:h-auto group"
               style={{ minWidth: 0 }}
             >
               <Institute institute={institute} isHovered={hovered === index} />

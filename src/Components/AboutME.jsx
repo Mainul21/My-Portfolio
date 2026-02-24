@@ -1,101 +1,177 @@
 import { LiaFileDownloadSolid } from "react-icons/lia";
-import { FaLinkedinIn, FaInstagram, FaGithub } from "react-icons/fa6";
+import { FaLinkedinIn, FaGithub } from "react-icons/fa6";
 import { gsap } from "gsap";
 import Typewriter from "react-ts-typewriter";
 import { useGSAP } from "@gsap/react";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 
 const AboutME = ({ scroll }) => {
   const containerRef = useRef();
   const textRef = useRef();
   const imgRef = useRef();
+  const nameRef = useRef();
+  const [particles, setParticles] = useState([]);
+
+  // Generate floating particles
+  useEffect(() => {
+    const newParticles = Array.from({ length: 20 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 4 + 2,
+      duration: Math.random() * 4 + 4,
+      delay: Math.random() * 4,
+      opacity: Math.random() * 0.4 + 0.1,
+    }));
+    setParticles(newParticles);
+  }, []);
 
   useGSAP(() => {
     const tl = gsap.timeline();
-    
-    tl.from(textRef.current.children, {
-      y: 30,
+
+    // Animate name lines (no split-text, just animate the heading blocks)
+    if (nameRef.current) {
+      tl.from(nameRef.current.children, {
+        y: 50,
+        opacity: 0,
+        duration: 0.9,
+        stagger: 0.15,
+        ease: "power3.out",
+      });
+    }
+
+    tl.from(textRef.current?.children || [], {
+      y: 40,
       opacity: 0,
       duration: 0.8,
-      stagger: 0.2,
+      stagger: 0.15,
       ease: "power3.out",
-    })
-    .from(imgRef.current, {
-      x: 30,
-      opacity: 0,
-      duration: 1,
-      ease: "power3.out",
-    }, "-=0.5");
+    }, "-=0.3")
+      .from(imgRef.current, {
+        scale: 0.8,
+        opacity: 0,
+        duration: 1.2,
+        ease: "power3.out",
+      }, "-=0.8");
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="min-h-[80vh] flex items-center justify-center py-12 px-6 md:px-12 lg:px-20 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-accent-teal/5 rounded-full blur-[100px]"></div>
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-600/5 rounded-full blur-[100px]"></div>
-      </div>
+    <section ref={containerRef} className="min-h-[85vh] flex items-center justify-center py-12 px-6 md:px-12 lg:px-20 relative overflow-hidden">
+      {/* Ambient glow behind the section */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-indigo-600/[0.07] via-transparent to-transparent rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
         {/* Text Content */}
-        <div ref={textRef} className="flex flex-col items-start space-y-6">
-          <div className="flex items-center gap-2 text-accent-teal font-semibold tracking-widest text-sm uppercase">
-            
-            Full-Stack Developer
-          </div>
-          
-          <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight">
-            Md. Mainul <br />
-            <span className="text-gray-400">Hossain Chisty</span>
-          </h1>
+        <div className="flex flex-col items-start space-y-7">
+          <div ref={nameRef} className="space-y-2">
+            <div className="section-label mb-6">
+              Full-Stack Developer
+            </div>
 
-          <div className="text-lg md:text-xl text-text-secondary max-w-lg">
-            <Typewriter
-              loop={true}
-              delay={2000}
-              speed={50}
-              text={[
-                "Building digital experiences.",
-                "Solving complex problems.",
-                "Loving code & coffee.",
-              ]}
-            />
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.1] tracking-tight">
+              Md. Mainul
+            </h1>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight gradient-text">
+              Hossain Chisty
+            </h1>
           </div>
 
-          <p className="text-text-secondary max-w-md leading-relaxed">
-            I create scalable, high-performance web applications using modern technologies. Let's build something amazing together.
-          </p>
+          <div ref={textRef} className="space-y-6">
+            <div className="text-lg md:text-xl text-text-secondary max-w-lg font-light">
+              <span className="text-accent-teal font-mono text-sm mr-2">&gt;</span>
+              <Typewriter
+                loop={true}
+                delay={2000}
+                speed={50}
+                text={[
+                  "Building digital experiences.",
+                  "Solving complex problems.",
+                  "Loving code & coffee.",
+                ]}
+              />
+            </div>
 
-          <div className="flex flex-wrap gap-4 pt-4">
-            <a 
-              href="https://drive.google.com/file/d/1Df_jzrI5cNmmv3F91Lz7FuqvUzyvqCBm/view?usp=sharing"
-              download="MAINUL_HOSSAIN_CHISTY_Resume.pdf"
-              className="btn btn-outline border-accent-teal text-accent-teal hover:bg-accent-teal hover:text-dark-bg hover:border-accent-teal rounded-none px-8 uppercase tracking-wider text-sm font-bold transition-all duration-300 flex items-center gap-2"
-            >
-              <LiaFileDownloadSolid className="text-xl" />
-              Download CV
-            </a>
-            
-            
+            <p className="text-text-secondary max-w-md leading-relaxed">
+              I create scalable, high-performance web applications using modern technologies. Let's build something amazing together.
+            </p>
+
+            <div className="flex flex-wrap gap-4 pt-2">
+              <a
+                href="https://drive.google.com/file/d/1Df_jzrI5cNmmv3F91Lz7FuqvUzyvqCBm/view?usp=sharing"
+                download="MAINUL_HOSSAIN_CHISTY_Resume.pdf"
+                className="magnetic-btn group relative inline-flex items-center gap-3 bg-gradient-to-r from-accent-indigo to-accent-teal text-white font-semibold px-8 py-3.5 rounded-xl overflow-hidden transition-all duration-500 hover:shadow-xl hover:shadow-indigo-500/25"
+              >
+                <LiaFileDownloadSolid className="text-xl group-hover:animate-bounce" />
+                <span className="relative z-10">Download CV</span>
+              </a>
+
+              <div className="flex items-center gap-3">
+                <a
+                  href="https://github.com/Mainul21"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 rounded-xl glass-card flex items-center justify-center text-text-secondary hover:text-white hover:border-accent-indigo/50 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-indigo-500/10"
+                >
+                  <FaGithub className="text-lg" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/mainulhossainchisty/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-12 h-12 rounded-xl glass-card flex items-center justify-center text-text-secondary hover:text-white hover:border-accent-indigo/50 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-indigo-500/10"
+                >
+                  <FaLinkedinIn className="text-lg" />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Image/Illustration */}
+        {/* Image / Illustration */}
         <div ref={imgRef} className="relative flex justify-center lg:justify-end">
           <div className="relative w-full max-w-md aspect-square">
-            {/* Placeholder for 3D illustration or user image with effects */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-accent-teal/20 to-transparent rounded-full blur-3xl"></div>
-            <img
-              className="relative z-10 w-full h-full object-contain drop-shadow-2xl"
-              src="https://i.ibb.co.com/Z6ryGzYk/formal-photo-removebg-preview.png"
-              alt="Mainul's portrait"
-            />
-            {/* Floating elements decoration */}
-            <div className="absolute top-10 right-10 w-16 h-16 bg-card-bg rounded-xl shadow-xl flex items-center justify-center border border-white/10 animate-bounce delay-100">
-              <span className="text-2xl font-bold text-accent-teal">JS</span>
+            {/* Floating particles */}
+            {particles.map((p) => (
+              <div
+                key={p.id}
+                className="absolute rounded-full animate-float"
+                style={{
+                  left: `${p.x}%`,
+                  top: `${p.y}%`,
+                  width: `${p.size}px`,
+                  height: `${p.size}px`,
+                  background: p.id % 2 === 0
+                    ? 'rgba(99, 102, 241, 0.5)'
+                    : 'rgba(34, 211, 238, 0.4)',
+                  animationDuration: `${p.duration}s`,
+                  animationDelay: `${p.delay}s`,
+                  opacity: p.opacity,
+                  filter: 'blur(0.5px)',
+                }}
+              />
+            ))}
+
+            {/* Gradient ring behind portrait */}
+            <div className="absolute inset-[-20px] rounded-full bg-gradient-to-br from-accent-indigo/20 via-transparent to-accent-teal/20 animate-[spin_20s_linear_infinite] blur-xl" />
+
+            {/* Portrait */}
+            <div className="relative z-10 w-full h-full rounded-full overflow-hidden border-2 border-white/10 shadow-2xl shadow-indigo-500/10">
+              <img
+                className="w-full h-full object-contain"
+                src="https://i.ibb.co.com/Z6ryGzYk/formal-photo-removebg-preview.png"
+                alt="Mainul's portrait"
+              />
             </div>
-            <div className="absolute bottom-20 left-0 w-20 h-14 bg-card-bg rounded-xl shadow-xl flex items-center justify-center border border-white/10 animate-pulse delay-700">
-              <span className="text-xl font-bold text-blue-400">React</span>
+
+            {/* Floating tech badges */}
+            <div className="absolute top-8 right-4 w-16 h-16 glass-card rounded-xl flex items-center justify-center animate-float shadow-lg shadow-indigo-500/10">
+              <span className="text-lg font-bold text-yellow-300">JS</span>
+            </div>
+            <div className="absolute bottom-24 -left-4 w-20 h-14 glass-card rounded-xl flex items-center justify-center animate-float-delay shadow-lg shadow-cyan-500/10">
+              <span className="text-lg font-bold text-cyan-400">React</span>
+            </div>
+            <div className="absolute top-1/2 -right-6 w-14 h-14 glass-card rounded-xl flex items-center justify-center animate-float-slow shadow-lg shadow-violet-500/10">
+              <span className="text-sm font-bold text-violet-400">Py</span>
             </div>
           </div>
         </div>

@@ -8,7 +8,16 @@
     background-position: center;
     background-size: cover;
     width: 350px;
-    /* height: 400px; Height is handled by the card content */
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mySwiper .swiper-slide-active {
+    transform: scale(1.02);
+}
+
+.mySwiper .swiper-slide:not(.swiper-slide-active) {
+    opacity: 0.5;
+    filter: blur(1px);
 }
 
 @media (min-width: 768px) {
@@ -16,8 +25,3 @@
         width: 450px;
     }
 }
-
-/* 
-   The default slideShadows might be too dark or not fit the theme. 
-   We can adjust opacity if needed, but let's stick to default for now as per image.
-*/

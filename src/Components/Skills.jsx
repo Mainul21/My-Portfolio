@@ -1,5 +1,5 @@
 import { useGSAP } from "@gsap/react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
@@ -14,36 +14,42 @@ gsap.registerPlugin(ScrollTrigger);
 const Skills = () => {
   const containerRef = useRef(null);
   const cardsRef = useRef([]);
+  const [hoveredCard, setHoveredCard] = useState(null);
 
   const skills = [
-    { name: "Python", icon: <FaPython className="text-[#3776AB]" />, color: "border-[#3776AB]" },
-    { name: "HTML", icon: <FaHtml5 className="text-[#E34F26]" />, color: "border-[#E34F26]" },
-    { name: "CSS", icon: <FaCss3Alt className="text-[#1572B6]" />, color: "border-[#1572B6]" },
-    { name: "JavaScript", icon: <FaJs className="text-[#F7DF1E]" />, color: "border-[#F7DF1E]" },
-    { name: "React", icon: <FaReact className="text-[#61DAFB]" />, color: "border-[#61DAFB]" },
-    { name: "MongoDB", icon: <SiMongodb className="text-[#47A248]" />, color: "border-[#47A248]" },
-    { name: "Kotlin", icon: <SiKotlin className="text-[#7F52FF]" />, color: "border-[#7F52FF]" },
-    { name: "Node.js", icon: <FaNodeJs className="text-[#339933]" />, color: "border-[#339933]" },
-    { name: "Firebase", icon: <SiFirebase className="text-[#FFCA28]" />, color: "border-[#FFCA28]" },
-    { name: "Tailwind CSS", icon: <SiTailwindcss className="text-[#06B6D4]" />, color: "border-[#06B6D4]" },
-    { name: "PostgreSQL", icon: <SiPostgresql className="text-[#4169E1]" />, color: "border-[#4169E1]" },
-    { name: "GitHub", icon: <FaGithub className="text-white" />, color: "border-white" },
+    { name: "Python", icon: <FaPython />, color: "#3776AB", glow: "rgba(55, 118, 171, 0.3)" },
+    { name: "HTML", icon: <FaHtml5 />, color: "#E34F26", glow: "rgba(227, 79, 38, 0.3)" },
+    { name: "CSS", icon: <FaCss3Alt />, color: "#1572B6", glow: "rgba(21, 114, 182, 0.3)" },
+    { name: "JavaScript", icon: <FaJs />, color: "#F7DF1E", glow: "rgba(247, 223, 30, 0.3)" },
+    { name: "React", icon: <FaReact />, color: "#61DAFB", glow: "rgba(97, 218, 251, 0.3)" },
+    { name: "MongoDB", icon: <SiMongodb />, color: "#47A248", glow: "rgba(71, 162, 72, 0.3)" },
+    { name: "Kotlin", icon: <SiKotlin />, color: "#7F52FF", glow: "rgba(127, 82, 255, 0.3)" },
+    { name: "Node.js", icon: <FaNodeJs />, color: "#339933", glow: "rgba(51, 153, 51, 0.3)" },
+    { name: "Firebase", icon: <SiFirebase />, color: "#FFCA28", glow: "rgba(255, 202, 40, 0.3)" },
+    { name: "Tailwind CSS", icon: <SiTailwindcss />, color: "#06B6D4", glow: "rgba(6, 182, 212, 0.3)" },
+    { name: "PostgreSQL", icon: <SiPostgresql />, color: "#4169E1", glow: "rgba(65, 105, 225, 0.3)" },
+    { name: "GitHub", icon: <FaGithub />, color: "#E2E8F0", glow: "rgba(226, 232, 240, 0.3)" },
   ];
 
   useGSAP(() => {
     gsap.fromTo(cardsRef.current,
       {
         opacity: 0,
-        y: 30,
-        scale: 0.9
+        y: 50,
+        scale: 0.85,
+        rotateY: -15,
       },
       {
         opacity: 1,
         y: 0,
         scale: 1,
-        duration: 0.5,
-        stagger: 0.1,
-        ease: "power2.out",
+        rotateY: 0,
+        duration: 0.7,
+        stagger: {
+          each: 0.08,
+          from: "start",
+        },
+        ease: "back.out(1.4)",
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top 80%",
@@ -54,29 +60,87 @@ const Skills = () => {
     );
   }, { scope: containerRef });
 
+  const handleCardMouseMove = (e, index) => {
+    const card = cardsRef.current[index];
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = (y - centerY) / 12;
+    const rotateY = (centerX - x) / 12;
+
+    card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+
+    // Move the glow
+    const glowEl = card.querySelector('.card-glow');
+    if (glowEl) {
+      glowEl.style.left = `${x}px`;
+      glowEl.style.top = `${y}px`;
+      glowEl.style.opacity = '1';
+    }
+  };
+
+  const handleCardMouseLeave = (index) => {
+    const card = cardsRef.current[index];
+    if (!card) return;
+    card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)';
+    const glowEl = card.querySelector('.card-glow');
+    if (glowEl) {
+      glowEl.style.opacity = '0';
+    }
+    setHoveredCard(null);
+  };
+
   return (
-    <section ref={containerRef} className="py-20 px-6 md:px-12 lg:px-20 border-b border-gray-800">
+    <section ref={containerRef} className="py-20 px-6 md:px-12 lg:px-20 relative">
+      <div className="gradient-divider mb-20" />
       <div className="max-w-7xl mx-auto space-y-12">
         <div className="flex flex-col items-center gap-4">
-          <div className="flex items-center gap-2 text-accent-teal font-bold tracking-widest text-sm uppercase">
-            <span className="text-lg">✖</span> SKILLS
+          <div className="section-label">
+            SKILLS
           </div>
           <h2 className="text-3xl md:text-5xl font-bold text-white text-center">
-            My Tech <span className="text-accent-teal">Stack</span>
+            My Tech <span className="gradient-text">Stack</span>
           </h2>
+          <p className="text-text-secondary text-center max-w-lg">Technologies I work with to bring ideas to life</p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
           {skills.map((skill, index) => (
             <div
               key={index}
               ref={el => cardsRef.current[index] = el}
-              className={`bg-card-bg p-6 rounded-xl border border-transparent hover:border-opacity-50 ${skill.color} hover:shadow-lg hover:shadow-accent-teal/10 transition-all duration-300 group flex flex-col items-center justify-center gap-4`}
+              onMouseMove={(e) => {
+                handleCardMouseMove(e, index);
+                setHoveredCard(index);
+              }}
+              onMouseLeave={() => handleCardMouseLeave(index)}
+              className="relative glass-card p-6 rounded-xl cursor-pointer group flex flex-col items-center justify-center gap-4 overflow-hidden transition-all duration-500"
+              style={{
+                transformStyle: 'preserve-3d',
+                borderColor: hoveredCard === index ? `${skill.color}33` : 'rgba(148, 163, 184, 0.1)',
+                boxShadow: hoveredCard === index ? `0 0 30px ${skill.glow}` : 'none',
+              }}
             >
-              <div className="text-5xl transform group-hover:scale-110 transition-transform duration-300">
+              {/* Cursor-following glow */}
+              <div
+                className="card-glow absolute w-40 h-40 rounded-full pointer-events-none transition-opacity duration-300"
+                style={{
+                  background: `radial-gradient(circle, ${skill.glow}, transparent 70%)`,
+                  transform: 'translate(-50%, -50%)',
+                  opacity: 0,
+                }}
+              />
+
+              <div
+                className="relative z-10 text-5xl transition-all duration-500 group-hover:scale-110"
+                style={{ color: skill.color }}
+              >
                 {skill.icon}
               </div>
-              <span className="text-gray-300 font-medium group-hover:text-white transition-colors">
+              <span className="relative z-10 text-text-secondary font-medium group-hover:text-white transition-colors duration-300 text-sm">
                 {skill.name}
               </span>
             </div>
