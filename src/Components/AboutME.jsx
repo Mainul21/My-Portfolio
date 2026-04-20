@@ -97,7 +97,7 @@ const AboutME = ({ scroll }) => {
 
             <div className="flex flex-wrap gap-4 pt-2">
               <a
-                href="https://drive.google.com/file/d/1Df_jzrI5cNmmv3F91Lz7FuqvUzyvqCBm/view?usp=sharing"
+                href="https://drive.google.com/file/d/19rAKKLn4LvpmiK7aba9fj4OFeBknOLLM/view?usp=drive_link"
                 download="MAINUL_HOSSAIN_CHISTY_Resume.pdf"
                 className="magnetic-btn group relative inline-flex items-center gap-3 bg-gradient-to-r from-accent-indigo to-accent-teal text-white font-semibold px-8 py-3.5 rounded-xl overflow-hidden transition-all duration-500 hover:shadow-xl hover:shadow-indigo-500/25"
               >
