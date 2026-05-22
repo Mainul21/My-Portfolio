@@ -1,0 +1,13 @@
+/* ProfileCard specific styles (mostly handled by Tailwind in component, added for completeness) */
+.pc-container {
+  perspective: 1000px;
+}
+
+.pc-card {
+  will-change: transform;
+  backdrop-filter: blur(10px);
+}
+
+.pc-behind-glow {
+  will-change: opacity, transform;
+}
