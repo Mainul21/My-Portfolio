@@ -12,7 +12,17 @@ const experience = [
   { period: "2025", role: "IT Intern", company: "City Bank PLC", text: "Worked on requirements, process flows, system visuals and technical documentation across multiple systems." },
 ];
 
-const skills = ["JavaScript", "React", "Node.js", "Express", "REST APIs", "PostgreSQL", "MongoDB", "Corteza", "Postman", "Git & GitHub", "Tailwind CSS"];
+const skills = [
+  { group: "Languages & frameworks", items: ["JavaScript", "React", "Node.js", "Express", "Tailwind CSS"] },
+  { group: "Data & APIs", items: ["REST APIs", "PostgreSQL", "MongoDB"] },
+  { group: "Platforms & tools", items: ["Corteza", "Postman", "Git & GitHub"] },
+];
+
+const education = [
+  { degree: "B.Sc. in Computer Science", school: "BRAC University", place: "Merul Badda, Dhaka", period: "2021 — 2025", result: "CGPA 3.36 / 4.00" },
+  { degree: "Higher Secondary Certificate", school: "Government Tolaram College", place: "Chashara, Narayanganj", period: "2020", result: "GPA 4.50 / 5.00" },
+  { degree: "Secondary School Certificate", school: "Titas Gas Adarsha High School", place: "Demra, Dhaka", period: "2018", result: "GPA 4.67 / 5.00" },
+];
 
 function App() {
   const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -39,12 +49,12 @@ function App() {
             <p className="hero-copy">I build software around real business problems — from payroll logic and workflow automation to APIs and full-stack web applications.</p>
             <div className="hero-actions">
               <button className="primary-button" onClick={() => scrollTo("work")}>Explore my work <FaArrowDown /></button>
-              <a className="resume-link" href="https://drive.google.com/file/d/1rz3JM5ebBLyUKEB0BOWlOZV-D0YyfhRK/view?usp=drive_link" target="_blank" rel="noreferrer"><FaFileArrowDown /> Resume</a>
+              <a className="resume-link" href="https://drive.google.com/file/d/1I-4cNBENWHE-29xhNlBFJkdtE5szkKOE/view?usp=sharing" target="_blank" rel="noreferrer"><FaFileArrowDown /> Resume</a>
             </div>
           </div>
           <div className="hero-right">
             <div className="portrait">
-              <img src="/src/assets/images/Mainul.jpg" alt="Mainul Hossain Chisty" />
+              <img src="/formal photo.jpg" alt="Mainul Hossain Chisty" />
               <span>01 / 01</span>
             </div>
             <div className="hero-caption"><span>Currently</span><strong>Payroll & workflow systems</strong><small>SELISE Digital Platforms</small></div>
@@ -100,14 +110,26 @@ function App() {
         <section className="skills-section">
           <div className="container skills-layout">
             <div><p className="eyebrow">Tools</p><h2>The stack.</h2></div>
-            <div className="skills">{skills.map((skill) => <span key={skill}>{skill}</span>)}</div>
+            <div className="skill-groups">
+              {skills.map(({ group, items }) => (
+                <div className="skill-group" key={group}><h3>{group}</h3><div className="skills">{items.map((skill) => <span key={skill}>{skill}</span>)}</div></div>
+              ))}
+            </div>
           </div>
         </section>
 
         <section className="education-section">
-          <div className="container education-layout">
-            <div><p className="eyebrow">Education</p><h2>B.Sc. in Computer Science</h2></div>
-            <div><strong>BRAC University</strong><span>2021 — 2025</span><small>CGPA 3.36 / 4.00</small></div>
+          <div className="container">
+            <div className="section-top"><div><p className="eyebrow">Education</p><h2>Where I studied.</h2></div></div>
+            <div className="education-list">
+              {education.map((item) => (
+                <article className="education-item" key={item.degree}>
+                  <span className="timeline-date">{item.period}</span>
+                  <div><h3>{item.degree}</h3><p className="company">{item.school}</p><small>{item.place}</small></div>
+                  <strong>{item.result}</strong>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 
