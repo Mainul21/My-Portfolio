@@ -1,4 +1,4 @@
-import { FaArrowDown, FaArrowUpRightFromSquare, FaEnvelope, FaGithub, FaLinkedinIn, FaFileArrowDown } from "react-icons/fa6";
+import { FaArrowDown, FaArrowUp, FaArrowUpRightFromSquare, FaEnvelope, FaGithub, FaLinkedinIn, FaFileArrowDown } from "react-icons/fa6";
 
 const projects = [
   { number: "01", title: "Core Banking System", type: "Academic prototype", description: "A full-stack banking simulation covering authentication, transactions, loan management, role-based access, and audit logging.", stack: ["React", "Node.js", "Express", "PostgreSQL"], href: "https://github.com/Mainul21/Core-Banking-System", live: "https://core-banking-system-850t.onrender.com" },
