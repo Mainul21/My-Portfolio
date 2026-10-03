@@ -36,7 +36,7 @@ function App() {
           <div className="hero-copy">
             <p className="eyebrow">Associate Software Engineer · Dhaka, Bangladesh</p>
             <h1>Mainul Hossain<span>Chisty.</span></h1>
-            <p className="hero-summary">I build internal systems, workflow automation, and web applications—with a focus on turning business requirements into working software.</p>
+            <p className="hero-summary">Associate Software Engineer building internal systems, workflow automation, and web applications.</p>
             <div className="hero-actions"><button className="button button-dark" onClick={() => scrollTo("work")}>See selected work <FaArrowDown /></button><a className="text-link" href="https://drive.google.com/file/d/1rz3JM5ebBLyUKEB0BOWlOZV-D0YyfhRK/view?usp=drive_link" target="_blank" rel="noreferrer"><FaFileArrowDown /> Resume</a></div>
           </div>
           <aside className="hero-note"><div className="portrait-frame"><img src="/src/assets/images/Mainul.jpg" alt="Mainul Hossain Chisty" /></div><div className="hero-note-copy"><span>Currently</span><strong>Building payroll & workflow systems</strong><small>SELISE Digital Platforms</small></div></aside>
