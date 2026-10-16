@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import TechText from "./Components/TechText";
 import { FaArrowDown, FaArrowUp, FaArrowUpRightFromSquare, FaEnvelope, FaGithub, FaLinkedinIn, FaFileArrowDown } from "react-icons/fa6";
 
 const projects = [
@@ -24,7 +26,20 @@ const education = [
   { degree: "Secondary School Certificate", school: "Titas Gas Adarsha High School", place: "Demra, Dhaka", period: "2018", result: "GPA 4.67 / 5.00" },
 ];
 
+// Mirrors the old .hero h1 clamp(4.5rem, 9.2vw, 8.8rem) + mobile overrides, in px for TechText.
+const heroFontSize = () => {
+  const w = window.innerWidth;
+  if (w <= 560) return 64;
+  return Math.min(w <= 850 ? 107 : 141, Math.max(w <= 850 ? 64 : 72, w * (w <= 850 ? 0.15 : 0.092)));
+};
+
 function App() {
+  const [nameSize, setNameSize] = useState(heroFontSize);
+  useEffect(() => {
+    const onResize = () => setNameSize(heroFontSize());
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
   const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
   return (
@@ -45,7 +60,11 @@ function App() {
         <section className="hero container">
           <div className="hero-left">
             <p className="eyebrow">Associate Software Engineer · Dhaka</p>
-            <h1>Mainul<br /><em>Hossain Chisty.</em></h1>
+            <h1 className="hero-name" style={{ "--f": `${nameSize}px` }}>
+              {["Mainul", "Hossain", "Chisty."].map((word, i) => (
+                <TechText key={word} text={word} className={i ? "accent" : ""} fontFamily="Manrope" fontWeight={800} fontSize={nameSize} letterSpacing={-0.065} align="left" sweep={false} />
+              ))}
+            </h1>
             <p className="hero-copy">I build software around real business problems — from payroll logic and workflow automation to APIs and full-stack web applications.</p>
             <div className="hero-actions">
               <button className="primary-button" onClick={() => scrollTo("work")}>Explore my work <FaArrowDown /></button>
