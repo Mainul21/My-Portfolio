@@ -1,17 +1,29 @@
-import { useEffect, useState } from "react";
-import TechText from "./Components/TechText";
-import { FaArrowDown, FaArrowUp, FaArrowUpRightFromSquare, FaEnvelope, FaGithub, FaLinkedinIn, FaFileArrowDown } from "react-icons/fa6";
+import { useState } from "react";
+import TechHeading from "./Components/TechHeading";
+import { FaArrowDown, FaArrowUp, FaArrowUpRightFromSquare, FaChevronDown, FaEnvelope, FaGithub, FaLinkedinIn, FaFileArrowDown } from "react-icons/fa6";
 
 const projects = [
   { number: "01", title: "Core Banking System", type: "Full-stack application", description: "A banking simulation with authentication, transactions, loan management, role-based access and audit logging.", stack: ["React", "Node.js", "PostgreSQL"], href: "https://github.com/Mainul21/Core-Banking-System", live: "https://core-banking-system-850t.onrender.com", image: "https://opengraph.githubassets.com/1/Mainul21/Core-Banking-System" },
   { number: "02", title: "Meme Generator", type: "Full-stack application", description: "A web app for creating, customizing, saving, downloading and sharing memes with MongoDB-backed storage.", stack: ["React", "Node.js", "MongoDB"], href: "https://github.com/Mainul21/The-Meme-Project", image: "https://opengraph.githubassets.com/1/Mainul21/The-Meme-Project" },
   { number: "03", title: "NPS Dashboard", type: "Dashboard / API", description: "Business-unit filtering, personalized dashboards, NPS metrics, sentiment trends and a Node API layer.", stack: ["JavaScript", "Node.js", "Corteza"], href: "https://github.com/Mainul21/nps_dashboard", image: "https://opengraph.githubassets.com/1/Mainul21/nps_dashboard" },
+  { number: "04", title: "Snake Game", type: "Browser game", description: "Classic snake with easy wrap-around and hard wall modes, score tracking and pause — compiled to WebAssembly to play in the browser.", stack: ["Python", "Pygame", "WebAssembly"], href: "https://github.com/Mainul21/Snake-Game", live: "https://mainul21.github.io/Snake-Game/", image: "https://opengraph.githubassets.com/1/Mainul21/Snake-Game" },
 ];
 
 const experience = [
-  { period: "2026 — now", role: "Associate Software Engineer", company: "SELISE Digital Platforms", text: "Building payroll systems, calculation logic and REST APIs around country-specific compensation rules." },
-  { period: "2025", role: "Intern Developer · Finance & Legal", company: "SELISE Digital Platforms", text: "Built Payroll Bangladesh workflows and automated internal finance processes on Corteza." },
-  { period: "2025", role: "IT Intern", company: "City Bank PLC", text: "Worked on requirements, process flows, system visuals and technical documentation across multiple systems." },
+  { period: "Jan 2026 — now", role: "Associate Software Engineer", company: "SELISE Digital Platforms", text: "Building payroll systems, calculation logic and REST APIs around country-specific compensation rules.", points: [
+    "Owned the Bhutan payroll module — salary calculation, tax deduction and payslip generation — validating country-specific tax and compensation rules with a business analyst before implementation.",
+    "Implemented country-specific payroll logic reconciling Bangladesh and Bhutan tax and compensation rules, turning regulatory requirements into working calculation logic.",
+    "Built REST APIs (JavaScript, Corteza) to automate payroll workflows, testing endpoints with Postman as part of ongoing quality checks.",
+  ] },
+  { period: "Oct — Dec 2025", role: "Intern Developer · Finance & Legal", company: "SELISE Digital Platforms", text: "Built Payroll Bangladesh workflows and automated internal finance processes on Corteza.", points: [
+    "Took primary ownership of building the Payroll Bangladesh system on Corteza, including yearly employee review and promotion workflow modules — from requirements to a working system.",
+    "Automated internal finance workflows for the Finance & Legal division, reducing manual processing steps in existing operations.",
+  ] },
+  { period: "Feb — May 2025", role: "IT Intern", company: "City Bank PLC", text: "Worked on requirements, process flows, system visuals and technical documentation across multiple systems.", points: [
+    "Gathered and consolidated requirements from developers, business analysts and independent research into accurate technical documentation for 3–5 systems.",
+    "Created process flow diagrams and system visuals in Draw.io to communicate system architecture to development teams.",
+    "Organised documentation in Microsoft Word and SharePoint, maintaining version control and access across teams.",
+  ] },
 ];
 
 const skills = [
@@ -21,25 +33,13 @@ const skills = [
 ];
 
 const education = [
-  { degree: "B.Sc. in Computer Science", school: "BRAC University", place: "Merul Badda, Dhaka", period: "2021 — 2025", result: "CGPA 3.36 / 4.00" },
-  { degree: "Higher Secondary Certificate", school: "Government Tolaram College", place: "Chashara, Narayanganj", period: "2020", result: "GPA 4.50 / 5.00" },
-  { degree: "Secondary School Certificate", school: "Titas Gas Adarsha High School", place: "Demra, Dhaka", period: "2018", result: "GPA 4.67 / 5.00" },
+  { degree: "B.Sc. in Computer Science", school: "BRAC University", place: "Merul Badda, Dhaka", period: "2021 — 2025", result: "CGPA 3.36 / 4.00", image: "/education/brac.jpg" },
+  { degree: "Higher Secondary Certificate", school: "Government Tolaram College", place: "Chashara, Narayanganj", period: "2020", result: "GPA 4.50 / 5.00", image: "/education/tolaram.jpg" },
+  { degree: "Secondary School Certificate", school: "Titas Gas Adarsha High School", place: "Demra, Dhaka", period: "2018", result: "GPA 4.67 / 5.00", image: "/education/titas.jpg" },
 ];
 
-// Mirrors the old .hero h1 clamp(4.5rem, 9.2vw, 8.8rem) + mobile overrides, in px for TechText.
-const heroFontSize = () => {
-  const w = window.innerWidth;
-  if (w <= 560) return 64;
-  return Math.min(w <= 850 ? 107 : 141, Math.max(w <= 850 ? 64 : 72, w * (w <= 850 ? 0.15 : 0.092)));
-};
-
 function App() {
-  const [nameSize, setNameSize] = useState(heroFontSize);
-  useEffect(() => {
-    const onResize = () => setNameSize(heroFontSize());
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, []);
+  const [openJob, setOpenJob] = useState(null);
   const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
   return (
@@ -60,11 +60,7 @@ function App() {
         <section className="hero container">
           <div className="hero-left">
             <p className="eyebrow">Associate Software Engineer · Dhaka</p>
-            <h1 className="hero-name" style={{ "--f": `${nameSize}px` }}>
-              {["Mainul", "Hossain", "Chisty."].map((word, i) => (
-                <TechText key={word} text={word} className={i ? "accent" : ""} fontFamily="Manrope" fontWeight={800} fontSize={nameSize} letterSpacing={-0.065} align="left" sweep={false} />
-              ))}
-            </h1>
+            <TechHeading as="h1" text="Mainul" accent="Hossain Chisty." />
             <p className="hero-copy">I build software around real business problems — from payroll logic and workflow automation to APIs and full-stack web applications.</p>
             <div className="hero-actions">
               <button className="primary-button" onClick={() => scrollTo("work")}>Explore my work <FaArrowDown /></button>
@@ -82,7 +78,7 @@ function App() {
 
         <section id="work" className="work-section">
           <div className="container">
-            <div className="section-top"><div><p className="eyebrow">Selected work</p><h2>Things I've built.</h2></div><span className="section-index">01 — 03</span></div>
+            <div className="section-top"><div><p className="eyebrow">Selected work</p><TechHeading text="Things I've built." /></div><span className="section-index">01 — 04</span></div>
             <div className="project-grid">
               {projects.map((project) => (
                 <article className="project-card" key={project.title}>
@@ -103,12 +99,16 @@ function App() {
 
         <section id="experience" className="experience-section">
           <div className="container">
-            <div className="section-top"><div><p className="eyebrow">Experience</p><h2>Where I've worked.</h2></div></div>
+            <div className="section-top"><div><p className="eyebrow">Experience</p><TechHeading text="Where I've worked." /></div></div>
             <div className="timeline">
-              {experience.map((item) => (
+              {experience.map((item, i) => (
                 <article className="timeline-item" key={item.period + item.role}>
                   <span className="timeline-date">{item.period}</span>
-                  <div><h3>{item.role}</h3><p className="company">{item.company}</p><p>{item.text}</p></div>
+                  <div>
+                    <h3>{item.role}</h3><p className="company">{item.company}</p><p className="timeline-summary">{item.text}</p>
+                    <button className="contrib-toggle" aria-expanded={openJob === i} aria-controls={`job-${i}`} onClick={() => setOpenJob(openJob === i ? null : i)}>Contributions <FaChevronDown /></button>
+                    <div className="contrib" id={`job-${i}`} data-open={openJob === i}><ul>{item.points.map((point) => <li key={point}>{point}</li>)}</ul></div>
+                  </div>
                 </article>
               ))}
             </div>
@@ -117,7 +117,7 @@ function App() {
 
         <section id="about" className="about-section">
           <div className="container about-layout">
-            <div><p className="eyebrow">How I work</p><h2>From business rules to working systems.</h2></div>
+            <div><p className="eyebrow">How I work</p><TechHeading text="From business rules to working systems." /></div>
             <div className="about-text">
               <p>My work sits between technology and business. I like understanding the real workflow first, then turning requirements into something people can actually use.</p>
               <p>That has meant payroll logic, APIs, internal automation, testing, documentation and plenty of conversations with developers and business stakeholders.</p>
@@ -128,7 +128,7 @@ function App() {
 
         <section className="skills-section">
           <div className="container skills-layout">
-            <div><p className="eyebrow">Tools</p><h2>The stack.</h2></div>
+            <div><p className="eyebrow">Tools</p><TechHeading text="The stack." /></div>
             <div className="skill-groups">
               {skills.map(({ group, items }) => (
                 <div className="skill-group" key={group}><h3>{group}</h3><div className="skills">{items.map((skill) => <span key={skill}>{skill}</span>)}</div></div>
@@ -139,13 +139,14 @@ function App() {
 
         <section className="education-section">
           <div className="container">
-            <div className="section-top"><div><p className="eyebrow">Education</p><h2>Where I studied.</h2></div></div>
+            <div className="section-top"><div><p className="eyebrow">Education</p><TechHeading text="Where I studied." /></div></div>
             <div className="education-list">
               {education.map((item) => (
                 <article className="education-item" key={item.degree}>
                   <span className="timeline-date">{item.period}</span>
                   <div><h3>{item.degree}</h3><p className="company">{item.school}</p><small>{item.place}</small></div>
                   <strong>{item.result}</strong>
+                  <img className="education-photo" src={item.image} alt="" loading="lazy" decoding="async" />
                 </article>
               ))}
             </div>
@@ -155,7 +156,7 @@ function App() {
         <section id="contact" className="contact-section">
           <div className="container">
             <p className="eyebrow">Contact</p>
-            <h2>Let's make something<br /><em>useful.</em></h2>
+            <TechHeading text="Let's make something" accent="useful." />
             <div className="contact-row">
               <a href="mailto:mainul.hossain.chisty@gmail.com">mainul.hossain.chisty@gmail.com <FaArrowUpRightFromSquare /></a>
               <div><a href="https://www.linkedin.com/in/mainulhossainchisty/" target="_blank" rel="noreferrer"><FaLinkedinIn /> LinkedIn</a><a href="https://github.com/Mainul21" target="_blank" rel="noreferrer"><FaGithub /> GitHub</a><a href="mailto:mainul.hossain.chisty@gmail.com"><FaEnvelope /> Email</a></div>
