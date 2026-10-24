@@ -1,5 +1,6 @@
 import { useState } from "react";
 import TechHeading from "./Components/TechHeading";
+import skillIcons from "./skillIcons";
 import { FaArrowDown, FaArrowUp, FaArrowUpRightFromSquare, FaChevronDown, FaEnvelope, FaGithub, FaLinkedinIn, FaFileArrowDown } from "react-icons/fa6";
 
 const projects = [
@@ -31,6 +32,17 @@ const skills = [
   { group: "Data & APIs", items: ["REST APIs", "PostgreSQL", "MongoDB"] },
   { group: "Platforms & tools", items: ["Corteza", "Postman", "Git & GitHub"] },
 ];
+
+const SkillList = ({ items, hidden }) => (
+  <ul aria-hidden={hidden || undefined}>
+    {items.map((skill) => (
+      <li key={skill}>
+        {skillIcons[skill] && <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d={skillIcons[skill]} /></svg>}
+        {skill}
+      </li>
+    ))}
+  </ul>
+);
 
 const education = [
   { degree: "B.Sc. in Computer Science", school: "BRAC University", place: "Merul Badda, Dhaka", period: "2021 — 2025", result: "CGPA 3.36 / 4.00", image: "/education/brac.jpg" },
@@ -165,10 +177,16 @@ function App() {
         <section id="about" className="about-section">
           <div className="container about-layout">
             <div><p className="eyebrow">How I work</p><TechHeading text="From business rules to working systems." /></div>
-            <div className="about-text">
-              <p>My work sits between technology and business. I like understanding the real workflow first, then turning requirements into something people can actually use.</p>
-              <p>That has meant payroll logic, APIs, internal automation, testing, documentation and plenty of conversations with developers and business stakeholders.</p>
-              <div className="process"><span>01 Understand</span><span>02 Build</span><span>03 Test</span><span>04 Explain</span></div>
+            <div className="agentic">
+              <p className="eyebrow">With AI agents</p>
+              <h3>Agentic development cycle</h3>
+              <p className="agentic-lead">AI agents in the loop, with a human owning every decision.</p>
+              <ol className="cycle">
+                {[['Plan', 'Break the problem down and set clear specs.'], ['Delegate', 'Hand focused tasks to AI coding agents.'], ['Review', 'Read every diff, verify, test.'], ['Ship', 'Lint and build gate every deploy in CI.']].map(([title, desc]) => (
+                  <li key={title}><h4>{title}</h4><p>{desc}</p></li>
+                ))}
+              </ol>
+              <p className="cycle-repeat" aria-hidden="true">↺ repeat</p>
             </div>
           </div>
         </section>
@@ -176,9 +194,15 @@ function App() {
         <section className="skills-section">
           <div className="container skills-layout">
             <div><p className="eyebrow">Tools</p><TechHeading text="The stack." /></div>
-            <div className="skill-groups">
-              {skills.map(({ group, items }) => (
-                <div className="skill-group" key={group}><h3>{group}</h3><div className="skills">{items.map((skill) => <span key={skill}>{skill}</span>)}</div></div>
+            <div className="skill-rows">
+              {skills.map(({ group, items }, i) => (
+                <div className="skill-row" style={{ "--d": `${30 + items.length * 4}s` }} key={group}>
+                  <h3><span>{String(i + 1).padStart(2, "0")} /</span> {group}</h3>
+                  <div className="marquee"><div className={`track${i % 2 ? " rev" : ""}`}>
+                    <SkillList items={items} />
+                    <SkillList items={items} hidden />
+                  </div></div>
+                </div>
               ))}
             </div>
           </div>
