@@ -1,6 +1,6 @@
 # My Portfolio
 
-Welcome to **My Portfolio** – a personal website built to showcase my skills, experiences, education, and projects. This portfolio is crafted with a modern web stack that leverages **React**, **Vite**, **Tailwind CSS**, and **Firebase**, along with impressive animations powered by **GSAP** and an interactive contact form powered by **EmailJS**. Enjoy a smooth and dynamic experience as you navigate through my work!
+Welcome to **My Portfolio** – a personal website built to showcase my skills, experiences, education, and projects. This portfolio is crafted with a modern web stack that leverages **React**, **Vite**, **Tailwind CSS**, deployed on **Render**, along with impressive animations powered by **GSAP** and an interactive contact form powered by **EmailJS**. Enjoy a smooth and dynamic experience as you navigate through my work!
 
 ---
 
@@ -19,7 +19,7 @@ Hello! I am **MD. MAINUL HOSSAIN CHISTY** – a Computer Science student and tec
 - **Education & Experience Timeline:** Uses timeline components to list educational institutes and work-related experiences.
 - **Contact Form:** Includes a contact form powered by **EmailJS** with real-time validations and visual feedback using sweet alerts.
 - **Modern Tooling & Styling:** Developed with **React** in a **Vite** environment, styled with **Tailwind CSS** and **DaisyUI** for UI components.
-- **Firebase Integration:** Prepared for Firebase hosting and further backend service integration.
+- **Deployment:** Live on Render (https://mainul-hossain-chisty.onrender.com), CI via GitHub Actions (`.github/workflows/ci.yml`).
 
 ---
 
@@ -30,7 +30,7 @@ To work with this project, ensure that you have the following installed:
 - **Node.js** (v14 or higher)
 - **npm** or **yarn**
 - Basic knowledge of React, Vite, and tailwind setup
-- Environment variables configured for EmailJS and Firebase (see configuration below)
+- Environment variables configured for EmailJS (see configuration below)
 
 Additional dependencies are defined in the [package.json](./package.json) file, which includes:
 
@@ -41,7 +41,6 @@ Additional dependencies are defined in the [package.json](./package.json) file, 
 | Tailwind CSS & DaisyUI    | Styling and UI components                     |
 | GSAP & @gsap/react        | Animation library for dynamic effects         |
 | EmailJS Browser           | Sends emails via form submission              |
-| Firebase                  | Hosting and backend integration               |
 | React Icons               | Icons for visual enhancements                 |
 
 ---
@@ -116,15 +115,13 @@ Please ensure that any changes you make are tested locally before submitting a p
 
 ## Configuration
 
-Before running the project, ensure you configure your environment variables required for EmailJS and (if needed) Firebase. Create a file named `.env` in the project root and include the following variables:
+Before running the project, ensure you configure your environment variables required for EmailJS. Create a file named `.env` in the project root and include the following variables:
 
 ```
 VITE_service_id=your_emailjs_service_id
 VITE_template_id=your_emailjs_template_id
 VITE_public_key=your_emailjs_public_key
 ```
-
-Additionally, if you integrate further Firebase features, adjust the `firebase.config.js` file with the necessary credentials.
 
 ---
 
@@ -136,7 +133,7 @@ After successfully setting up the project, you can use the portfolio by:
 - **Interacting with animations:** Enjoy various animations such as fading effects, sliding transitions, and typewriter animations as you scroll.
 - **Checking out the projects:** Hover over project cards to reveal details, live links, and source code on GitHub.
 - **Submitting a message:** Use the contact form to send a message. Once submitted, a sweet alert will notify you of the email status.
-- **Deploying the project:** Build the project using `npm run build` (or `yarn build`) to generate optimized production files, then deploy using your preferred hosting provider (Firebase hosting is configured by default).
+- **Deploying the project:** Build the project using `npm run build` (or `yarn build`) to generate optimized production files, then deploy using your preferred hosting provider (deployed on Render).
 
 Feel free to explore the code inside the `src`, `Components`, and configuration files to learn more about how each part is integrated.
 
@@ -144,7 +141,7 @@ Feel free to explore the code inside the `src`, `Components`, and configuration 
 
 # Live Link
 
-[**Visit My Portfolio**](https://my-portfolio-9721b.web.app/)
+[**Visit My Portfolio**](https://mainul-hossain-chisty.onrender.com/)
 
 ---
 

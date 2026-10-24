@@ -46,6 +46,7 @@ const TechHeading = ({ as: Tag = "h2", text, accent = "", className = "" }) => {
 
   return (
     <Tag ref={ref} className={`tech-heading ${className}`.trim()} style={layout && { "--f": `${layout.size}px` }}>
+      <span className="sr-only">{accent ? `${text} ${accent}` : text}</span>
       {layout?.lines.map(([line, isAccent], i) => (
         <TechText key={`${i}-${line}`} text={line} className={isAccent ? "accent" : ""} fontFamily={layout.family} fontWeight={layout.weight} fontSize={layout.size} letterSpacing={layout.spacing} align="left" sweep={false} />
       ))}
