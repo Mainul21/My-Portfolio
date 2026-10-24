@@ -48,9 +48,10 @@ function App() {
         <div className="container header-inner">
           <button className="wordmark" onClick={() => scrollTo("top")} aria-label="Back to top">MHC<span>.</span></button>
           <nav aria-label="Primary navigation">
-            <button onClick={() => scrollTo("work")}>Work</button>
-            <button onClick={() => scrollTo("experience")}>Experience</button>
-            <button onClick={() => scrollTo("about")}>About</button>
+            <a href="#work">Work</a>
+            <a href="#experience">Experience</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
           </nav>
           <a className="header-cta" href="https://github.com/Mainul21" target="_blank" rel="noreferrer">GitHub <FaArrowUpRightFromSquare /></a>
         </div>
@@ -64,12 +65,13 @@ function App() {
             <p className="hero-copy">I build software around real business problems — from payroll logic and workflow automation to APIs and full-stack web applications.</p>
             <div className="hero-actions">
               <button className="primary-button" onClick={() => scrollTo("work")}>Explore my work <FaArrowDown /></button>
-              <a className="resume-link" href="https://drive.google.com/file/d/1I-4cNBENWHE-29xhNlBFJkdtE5szkKOE/view?usp=sharing" target="_blank" rel="noreferrer"><FaFileArrowDown /> Resume</a>
+              <a className="resume-link" href="/Mainul_Hossain_Chisty_Resume.pdf" target="_blank" rel="noreferrer"><FaFileArrowDown /> Resume</a>
             </div>
           </div>
           <div className="hero-right">
             <div className="portrait">
-              <img src="/formal photo.jpg" alt="Mainul Hossain Chisty" />
+              {/* eslint-disable-next-line react/no-unknown-property -- React 18 only passes lowercase fetchpriority */}
+              <img src="/formal-photo.webp" alt="Mainul Hossain Chisty" width="600" height="822" fetchpriority="high" />
               <span>01 / 01</span>
             </div>
             <div className="hero-caption"><span>Currently</span><strong>Payroll & workflow systems</strong><small>SELISE Digital Platforms</small></div>
@@ -83,7 +85,7 @@ function App() {
               {projects.map((project) => (
                 <article className="project-card" key={project.title}>
                   <a className="project-image" href={project.href} target="_blank" rel="noreferrer">
-                    <img src={project.image} alt={project.title} />
+                    <img src={project.image} alt={project.title} loading="lazy" decoding="async" width="1200" height="600" />
                     <span>View project <FaArrowUpRightFromSquare /></span>
                   </a>
                   <div className="project-meta"><span>{project.number} / {project.type}</span><div>{project.stack.map((tag) => <b key={tag}>{tag}</b>)}</div></div>
@@ -158,7 +160,7 @@ function App() {
             <p className="eyebrow">Contact</p>
             <TechHeading text="Let's make something" accent="useful." />
             <div className="contact-row">
-              <a href="mailto:mainul.hossain.chisty@gmail.com">mainul.hossain.chisty@gmail.com <FaArrowUpRightFromSquare /></a>
+              <a href="mailto:mainul.hossain.chisty@gmail.com">mainul.hossain.chisty@gmail.com</a>
               <div><a href="https://www.linkedin.com/in/mainulhossainchisty/" target="_blank" rel="noreferrer"><FaLinkedinIn /> LinkedIn</a><a href="https://github.com/Mainul21" target="_blank" rel="noreferrer"><FaGithub /> GitHub</a><a href="mailto:mainul.hossain.chisty@gmail.com"><FaEnvelope /> Email</a></div>
             </div>
           </div>
