@@ -123,6 +123,9 @@ VITE_template_id=your_emailjs_template_id
 VITE_public_key=your_emailjs_public_key
 ```
 
+Contact form uses Web3Forms: get a free access key at https://web3forms.com.
+Set `VITE_WEB3FORMS_KEY` in `.env` (see `.env.example`) and in the Render environment variables (build-time, so redeploy after changing it).
+
 ---
 
 ## Usage
