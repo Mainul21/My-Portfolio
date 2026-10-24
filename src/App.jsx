@@ -38,6 +38,51 @@ const education = [
   { degree: "Secondary School Certificate", school: "Titas Gas Adarsha High School", place: "Demra, Dhaka", period: "2018", result: "GPA 4.67 / 5.00", image: "/education/titas.jpg" },
 ];
 
+const EMAIL = "mainul.hossain.chisty@gmail.com";
+const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY;
+const socials = [
+  { Icon: FaEnvelope, name: "Email", handle: EMAIL, href: `mailto:${EMAIL}` },
+  { Icon: FaLinkedinIn, name: "LinkedIn", handle: "in/mainulhossainchisty", href: "https://www.linkedin.com/in/mainulhossainchisty/" },
+  { Icon: FaGithub, name: "GitHub", handle: "@Mainul21", href: "https://github.com/Mainul21" },
+];
+
+function ContactForm() {
+  const [status, setStatus] = useState("idle");
+  if (!WEB3FORMS_KEY) return <p className="form-note">The contact form isn&apos;t available right now. Please email <a href={`mailto:${EMAIL}`}>{EMAIL}</a> directly.</p>;
+
+  const submit = async (e) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form));
+    setStatus("sending");
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify({ ...data, botcheck: form.botcheck.checked }) });
+      if (!(await res.json()).success) throw new Error("rejected");
+      form.reset();
+      setStatus("success");
+    } catch (err) {
+      console.error("Contact form failed:", err);
+      setStatus("error");
+    }
+  };
+
+  return (
+    <form className="contact-form" onSubmit={submit}>
+      <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
+      <input type="hidden" name="subject" value="New message from portfolio" />
+      <input type="checkbox" name="botcheck" className="botcheck" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+      <label>Name<input name="name" type="text" required maxLength={100} autoComplete="name" /></label>
+      <label>Email<input name="email" type="email" required maxLength={254} autoComplete="email" /></label>
+      <label>Message<textarea name="message" required maxLength={2000} rows={6} /></label>
+      <button className="primary-button" type="submit" disabled={status === "sending"}>{status === "sending" ? "Sending…" : "Send message"}</button>
+      <p className="form-status" data-state={status} aria-live="polite">
+        {status === "success" && "Thanks, your message was sent. I'll reply soon."}
+        {status === "error" && `Something went wrong. Please try again or email ${EMAIL}.`}
+      </p>
+    </form>
+  );
+}
+
 function App() {
   const [openJob, setOpenJob] = useState(null);
   const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -159,9 +204,19 @@ function App() {
           <div className="container">
             <p className="eyebrow">Contact</p>
             <TechHeading text="Let's make something" accent="useful." />
-            <div className="contact-row">
-              <a href="mailto:mainul.hossain.chisty@gmail.com">mainul.hossain.chisty@gmail.com</a>
-              <div><a href="https://www.linkedin.com/in/mainulhossainchisty/" target="_blank" rel="noreferrer"><FaLinkedinIn /> LinkedIn</a><a href="https://github.com/Mainul21" target="_blank" rel="noreferrer"><FaGithub /> GitHub</a><a href="mailto:mainul.hossain.chisty@gmail.com"><FaEnvelope /> Email</a></div>
+            <div className="contact-grid">
+              <div>
+                <h3 className="contact-sub">Connect with me</h3>
+                <ul className="social-list">
+                  {socials.map(({ Icon, name, handle, href }) => (
+                    <li key={name}><a href={href} {...(href.startsWith("http") && { target: "_blank", rel: "noreferrer" })}><Icon aria-hidden="true" /><span><strong>{name}</strong><small>{handle}</small></span></a></li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h3 className="contact-sub">Send a message</h3>
+                <ContactForm />
+              </div>
             </div>
           </div>
         </section>
