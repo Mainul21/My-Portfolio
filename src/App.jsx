@@ -1,12 +1,14 @@
-import { useState } from "react";
-import TechHeading from "./Components/TechHeading";
+import { useRef, useState } from "react";
+import useMotion from "./useMotion";
+import SplitFlapText from "./Components/SplitFlapText";
+import RotatingText from "./Components/RotatingText";
 import skillIcons from "./skillIcons";
 import { FaArrowDown, FaArrowUp, FaArrowUpRightFromSquare, FaChevronDown, FaEnvelope, FaGithub, FaLinkedinIn, FaFileArrowDown } from "react-icons/fa6";
 
 const projects = [
   { number: "01", title: "Core Banking System", type: "Full-stack application", description: "A banking simulation with authentication, transactions, loan management, role-based access and audit logging.", stack: ["React", "Node.js", "PostgreSQL"], href: "https://github.com/Mainul21/Core-Banking-System", live: "https://core-banking-system-850t.onrender.com", image: "/projects/Core-Banking-System.webp" },
-  { number: "02", title: "Meme Generator", type: "Full-stack application", description: "A web app for creating, customizing, saving, downloading and sharing memes with MongoDB-backed storage.", stack: ["React", "Node.js", "MongoDB"], href: "https://github.com/Mainul21/The-Meme-Project", image: "/projects/The-Meme-Project.webp" },
-  { number: "03", title: "NPS Dashboard", type: "Dashboard / API", description: "Business-unit filtering, personalized dashboards, NPS metrics, sentiment trends and a Node API layer.", stack: ["JavaScript", "Node.js", "Corteza"], href: "https://github.com/Mainul21/nps_dashboard", image: "/projects/nps_dashboard.webp" },
+  { number: "02", title: "Meme Generator", type: "Full-stack application", description: "A web app for creating, customizing, saving, downloading and sharing memes with MongoDB-backed storage.", stack: ["React", "Node.js", "MongoDB"], href: "https://github.com/Mainul21/The-Meme-Project", live: "https://meme-frontend-l6zg.onrender.com", image: "/projects/The-Meme-Project.webp" },
+  { number: "03", title: "NPS Dashboard", type: "Dashboard / API", description: "Business-unit filtering, personalized dashboards, NPS metrics, sentiment trends and a Node API layer.", stack: ["JavaScript", "Node.js", "Corteza"], href: "https://github.com/Mainul21/nps_dashboard", live: "https://npsdashboard.vercel.app/", image: "/projects/nps_dashboard.webp" },
   { number: "04", title: "Snake Game", type: "Browser game", description: "Classic snake with easy wrap-around and hard wall modes, score tracking and pause — compiled to WebAssembly to play in the browser.", stack: ["Python", "Pygame", "WebAssembly"], href: "https://github.com/Mainul21/Snake-Game", live: "https://mainul21.github.io/Snake-Game/", image: "/projects/Snake-Game.webp" },
 ];
 
@@ -28,15 +30,17 @@ const experience = [
 ];
 
 const skills = [
-  { group: "Languages & frameworks", items: ["JavaScript", "React", "Node.js", "Express", "Tailwind CSS"] },
-  { group: "Data & APIs", items: ["REST APIs", "PostgreSQL", "MongoDB"] },
-  { group: "Platforms & tools", items: ["Corteza", "Postman", "Git & GitHub"] },
+  { group: "Languages & frameworks", items: ["JavaScript", "Python", "Node.js", "Express", "React", "Tailwind CSS"] },
+  { group: "Data & APIs", items: ["PostgreSQL", "MongoDB", "REST APIs", "API testing"] },
+  { group: "Testing & QA", items: ["Manual testing", "Functional testing", "Regression testing", "Test case design", "Bug reporting", "STLC / SDLC"] },
+  { group: "Platforms & delivery", items: ["Corteza", "Postman", "Git & GitHub", "Jira", "Draw.io", "SharePoint", "Agile / Scrum", "Requirements gathering", "AI agents (Claude Code)"] },
 ];
 
+const MIN_PILLS = 12, SECS_PER_PILL = 3.7; // ~45px/s at ~165px per pill
 const SkillList = ({ items, hidden }) => (
   <ul aria-hidden={hidden || undefined}>
-    {items.map((skill) => (
-      <li key={skill}>
+    {items.map(({ skill, dup }, i) => (
+      <li key={i} className={dup ? "dup" : undefined} aria-hidden={dup || undefined}>
         {skillIcons[skill] && <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d={skillIcons[skill]} /></svg>}
         {skill}
       </li>
@@ -79,7 +83,7 @@ function ContactForm() {
   };
 
   return (
-    <form className="contact-form" onSubmit={submit}>
+    <form className="contact-form" data-motion="item" onSubmit={submit}>
       <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
       <input type="hidden" name="subject" value="New message from portfolio" />
       <input type="checkbox" name="botcheck" className="botcheck" tabIndex={-1} autoComplete="off" aria-hidden="true" />
@@ -96,29 +100,33 @@ function ContactForm() {
 }
 
 function App() {
+  const [color, setColor] = useState(false);
   const [openJob, setOpenJob] = useState(null);
-  const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  const shellRef = useRef(null);
+  useMotion(shellRef);
+  const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
 
   return (
-    <div className="site-shell">
+    <div className="site-shell" ref={shellRef}>
       <header className="site-header">
         <div className="container header-inner">
           <button className="wordmark" onClick={() => scrollTo("top")} aria-label="Back to top">MHC<span>.</span></button>
           <nav aria-label="Primary navigation">
-            <a href="#work">Work</a>
             <a href="#experience">Experience</a>
+            <a href="#work">Work</a>
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
           </nav>
           <a className="header-cta" href="https://github.com/Mainul21" target="_blank" rel="noreferrer">GitHub <FaArrowUpRightFromSquare /></a>
         </div>
+        <div className="scroll-progress" data-motion="progress" aria-hidden="true" />
       </header>
 
       <main id="top">
         <section className="hero container">
           <div className="hero-left">
             <p className="eyebrow">Associate Software Engineer · Dhaka</p>
-            <TechHeading as="h1" text="Mainul" accent="Hossain Chisty." />
+            <SplitFlapText text="Mainul" accent="Hossain Chisty." />
             <p className="hero-copy">I build software around real business problems — from payroll logic and workflow automation to APIs and full-stack web applications.</p>
             <div className="hero-actions">
               <button className="primary-button" onClick={() => scrollTo("work")}>Explore my work <FaArrowDown /></button>
@@ -126,7 +134,7 @@ function App() {
             </div>
           </div>
           <div className="hero-right">
-            <div className="portrait">
+            <div className={`portrait${color ? " is-color" : ""}`} onClick={() => matchMedia("(hover:none)").matches && setColor((c) => !c)}>
               {/* eslint-disable-next-line react/no-unknown-property -- React 18 only passes lowercase fetchpriority */}
               <img src="/formal-photo.webp" alt="Mainul Hossain Chisty" width="600" height="822" fetchpriority="high" />
               <span>01 / 01</span>
@@ -135,10 +143,29 @@ function App() {
           </div>
         </section>
 
+        <section id="experience" className="experience-section">
+          <div className="container">
+            <div className="section-top" data-motion="reveal"><div><p className="eyebrow">Experience</p><RotatingText prefix="Where I've" words={["worked", "learned", "shipped"]} /></div></div>
+            <div className="timeline" data-motion="reveal">
+              <span className="timeline-line" data-motion="line" aria-hidden="true" />
+              {experience.map((item, i) => (
+                <article className="timeline-item" key={item.period + item.role}>
+                  <span className="timeline-date">{item.period}</span>
+                  <div>
+                    <h3>{item.role}</h3><p className="company">{item.company}</p><p className="timeline-summary">{item.text}</p>
+                    <button className="contrib-toggle" aria-expanded={openJob === i} aria-controls={`job-${i}`} onClick={() => setOpenJob(openJob === i ? null : i)}>Contributions <FaChevronDown /></button>
+                    <div className="contrib" id={`job-${i}`} data-open={openJob === i}><ul>{item.points.map((point) => <li key={point}>{point}</li>)}</ul></div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section id="work" className="work-section">
           <div className="container">
-            <div className="section-top"><div><p className="eyebrow">Selected work</p><TechHeading text="Things I've built." /></div><span className="section-index">01 — 04</span></div>
-            <div className="project-grid">
+            <div className="section-top" data-motion="reveal"><div><p className="eyebrow">Selected work</p><RotatingText prefix="Things I've" words={["built", "shipped", "designed"]} /></div><span className="section-index">01 — 04</span></div>
+            <div className="project-grid" data-motion="reveal">
               {projects.map((project) => (
                 <article className="project-card" key={project.title}>
                   <a className="project-image" href={project.href} target="_blank" rel="noreferrer">
@@ -156,32 +183,14 @@ function App() {
           </div>
         </section>
 
-        <section id="experience" className="experience-section">
-          <div className="container">
-            <div className="section-top"><div><p className="eyebrow">Experience</p><TechHeading text="Where I've worked." /></div></div>
-            <div className="timeline">
-              {experience.map((item, i) => (
-                <article className="timeline-item" key={item.period + item.role}>
-                  <span className="timeline-date">{item.period}</span>
-                  <div>
-                    <h3>{item.role}</h3><p className="company">{item.company}</p><p className="timeline-summary">{item.text}</p>
-                    <button className="contrib-toggle" aria-expanded={openJob === i} aria-controls={`job-${i}`} onClick={() => setOpenJob(openJob === i ? null : i)}>Contributions <FaChevronDown /></button>
-                    <div className="contrib" id={`job-${i}`} data-open={openJob === i}><ul>{item.points.map((point) => <li key={point}>{point}</li>)}</ul></div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
         <section id="about" className="about-section">
           <div className="container about-layout">
-            <div><p className="eyebrow">How I work</p><TechHeading text="From business rules to working systems." /></div>
+            <div data-motion="item"><p className="eyebrow">How I work</p><RotatingText prefix="From business rules to" words={["working systems", "clean APIs", "real workflows"]} /></div>
             <div className="agentic">
               <p className="eyebrow">With AI agents</p>
               <h3>Agentic development cycle</h3>
               <p className="agentic-lead">AI agents in the loop, with a human owning every decision.</p>
-              <ol className="cycle">
+              <ol className="cycle" data-motion="reveal">
                 {[['Plan', 'Break the problem down and set clear specs.'], ['Delegate', 'Hand focused tasks to AI coding agents.'], ['Review', 'Read every diff, verify, test.'], ['Ship', 'Lint and build gate every deploy in CI.']].map(([title, desc]) => (
                   <li key={title}><h4>{title}</h4><p>{desc}</p></li>
                 ))}
@@ -193,25 +202,28 @@ function App() {
 
         <section className="skills-section">
           <div className="container skills-layout">
-            <div><p className="eyebrow">Tools</p><TechHeading text="The stack." /></div>
+            <div data-motion="item"><p className="eyebrow">Tools</p><RotatingText prefix="The" words={["stack", "toolkit", "workflow"]} /></div>
             <div className="skill-rows">
-              {skills.map(({ group, items }, i) => (
-                <div className="skill-row" style={{ "--d": `${30 + items.length * 4}s` }} key={group}>
+              {skills.map(({ group, items }, i) => {
+                const pills = Array.from({ length: Math.ceil(MIN_PILLS / items.length) }, (_, r) => items.map((skill) => ({ skill, dup: r > 0 }))).flat();
+                return (
+                <div className="skill-row" style={{ "--d": `${pills.length * SECS_PER_PILL}s` }} key={group}>
                   <h3><span>{String(i + 1).padStart(2, "0")} /</span> {group}</h3>
-                  <div className="marquee"><div className={`track${i % 2 ? " rev" : ""}`}>
-                    <SkillList items={items} />
-                    <SkillList items={items} hidden />
+                  <div className="marquee" data-motion="fade"><div className={`track${i % 2 ? " rev" : ""}`}>
+                    <SkillList items={pills} />
+                    <SkillList items={pills} hidden />
                   </div></div>
                 </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
 
         <section className="education-section">
           <div className="container">
-            <div className="section-top"><div><p className="eyebrow">Education</p><TechHeading text="Where I studied." /></div></div>
-            <div className="education-list">
+            <div className="section-top" data-motion="reveal"><div><p className="eyebrow">Education</p><RotatingText prefix="Where I" words={["studied", "grew", "started"]} /></div></div>
+            <div className="education-list" data-motion="reveal">
               {education.map((item) => (
                 <article className="education-item" key={item.degree}>
                   <span className="timeline-date">{item.period}</span>
@@ -226,12 +238,12 @@ function App() {
 
         <section id="contact" className="contact-section">
           <div className="container">
-            <p className="eyebrow">Contact</p>
-            <TechHeading text="Let's make something" accent="useful." />
+            <div data-motion="item"><p className="eyebrow">Contact</p>
+            <RotatingText prefix="Let's make something" words={["useful", "simple", "reliable"]} /></div>
             <div className="contact-grid">
               <div>
                 <h3 className="contact-sub">Connect with me</h3>
-                <ul className="social-list">
+                <ul className="social-list" data-motion="reveal">
                   {socials.map(({ Icon, name, handle, href }) => (
                     <li key={name}><a href={href} {...(href.startsWith("http") && { target: "_blank", rel: "noreferrer" })}><Icon aria-hidden="true" /><span><strong>{name}</strong><small>{handle}</small></span></a></li>
                   ))}
